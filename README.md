@@ -18,7 +18,8 @@ Why is a new ICT solution required?
 With the rapid growth of the economy and the increasing demand of online shopping due to convenience, fashion industries are also changing to meet the needs of the customers. Today, there are a wide range of fashion websites offering both physical and online shopping experiences for any customer. 
 
 However, despite the extensive options available, customers consistently seek personalized and seamless shopping experience as well as designs that are trendy and fit to them from any of the brands. Our project aims to fill in the gap for this and provide a platform that delivers exceptional and tailored shopping experience for the customers.
- 
+
+ 
 Project Goals
 
 •	Increase online sales and broaden the customer base.
