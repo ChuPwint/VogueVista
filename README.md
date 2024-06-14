@@ -22,16 +22,23 @@ However, despite the extensive options available, customers consistently seek pe
 Project Goals
 
 •	Increase online sales and broaden the customer base.
+
 •	Provide a wide range of fashion items along with thorough descriptions and stunning images.
+
 •	Provide interesting and updated material, like fashion tips, trend reports, and styling guidance.
+
 •	Development of a scalable and reliable website design.
 
 Objectives
 
 	Launch marketing campaigns using social media
+
 	Implement user-friendly and efficient checkout process
+
 	Utilize high quality images to showcase products as well as easy to read product details and descriptions
+
 	Collaborate with fashion journalists to write blogs on the website to get news and reports about fashion trends
+
 	Develop a website that provides an optimal user experience with being able to use our websites on desktop as well as on mobiles
 
 Target Audience
@@ -42,8 +49,11 @@ Target Audience
 Stakeholders
 
 	Project Team (Hay Man Hnin Aye, Choo Pwint Chal)
+
 	Online shoppers/ Fashion enthusiasts
+
 	Fashion designers
+
 	Fashion Journalists
 
 Estimated budget
