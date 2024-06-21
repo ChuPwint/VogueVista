@@ -28,6 +28,12 @@ class SignUpController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            "name" => "required|min:3|max:255|regex:/^[a-zA-Z]+$/",
+            "email" => "required",
+            "phone" => "required|max:10",
+            "password" => "required", 
+        ]);
         $userClass = new User();
         $userClass->createUser($request);
         return view("finishSignUp");
