@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class ResetPasswordController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view("Login/login");
+        return view("Login/resetPassword");
     }
 
     /**
@@ -28,6 +28,7 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         //
+        return view("Login/finishResetPassword");
     }
 
     /**

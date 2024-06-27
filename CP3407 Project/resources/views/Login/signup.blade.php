@@ -25,7 +25,7 @@ input[type=number] {
         {{-- image + logo --}}
         <div class="w-1/2 relative bg-black">
             <div class="w-full h-[700px]">
-                <img class=" object-cover w-full h-full" src="/images/Mask group.png" alt="Login">
+                <img class=" object-cover w-full h-full" src="/images/SignUp.png" alt="SignUp">
             </div>
             <div class="cursor-pointer absolute top-5 left-5">
                 <img class=" w-14" src="/images/Logo.png" alt="Login">

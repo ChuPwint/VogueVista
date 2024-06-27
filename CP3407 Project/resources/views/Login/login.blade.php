@@ -12,7 +12,7 @@
         {{-- image + logo --}}
         <div class="w-1/2 relative">
             <div class="w-full h-[600px]">
-                <img class=" object-cover w-full h-full" src="/images/don't be a square.jpeg" alt="Login">
+                <img class=" object-cover w-full h-full" src="/images/Login.jpeg" alt="Login">
             </div>
             <div class="cursor-pointer absolute top-10 left-[250px]">
                 <img class=" w-24" src="/images/Logo.png" alt="Login">
@@ -38,7 +38,7 @@
                             <label for="remember">Keep me logged in</label>
                         </div>
                         <div>
-                            <a href="" class="underline">Forgot Your Password?</a>
+                            <a href="/forgotPassword" class="underline">Forgot Your Password?</a>
                         </div>
                     </div>
                     <div class=" mt-5">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="mt-5">
                     <button class="w-full px-5 py-1 text-center rounded-md text-xl font-light border border-black">
-                        <img class="inline w-8 h-8 mr-3" src="/images/Group 5.png" alt="">
+                        <img class="inline w-8 h-8 mr-3" src="/images/Google.png" alt="">
                         Login with Google
                     </button>
                 </div>

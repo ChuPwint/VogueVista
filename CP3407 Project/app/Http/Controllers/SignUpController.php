@@ -12,7 +12,7 @@ class SignUpController extends Controller
      */
     public function index()
     {
-        return view("signup");
+        return view("Login/signup");
     }
 
     /**
@@ -36,7 +36,7 @@ class SignUpController extends Controller
         ]);
         $userClass = new User();
         $userClass->createUser($request);
-        return view("finishSignUp");
+        return view("Login/finishSignUp");
     }
 
     /**
