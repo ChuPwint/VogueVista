@@ -12,7 +12,7 @@
 
 <body>
     <div>
-        <nav class="bg-black dark:bg-gray-900 w-full border-gray-200">
+        <nav class="bg-black w-full">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <img src="/images/Logo.png" class="h-12 w-12 object-cover" alt="Flowbite Logo">
                 <div class="flex md:order-2 space-x-3 rtl:space-x-reverse">
@@ -62,23 +62,23 @@
                     <ul
                         class="flex flex-col p-4 md:p-0 mt-4 font-medium md:space-x-12 rtl:space-x-reverse md:flex-row md:mt-0 bg-black">
                         <li>
-                            <a href="#"
-                                class="block py-2 px-3 text-white bg-gray-400 rounded md:bg-transparent md:text-gray-400 md:p-0 md:dark:text-gray-400"
+                            <a href="/"
+                                class="block py-2 px-3 text-white md:text-gray-400 md:p-0"
                                 aria-current="page">Home</a>
                         </li>
                         <li>
-                            <a href="#" class="block py-2 px-3 md:hover:text-gray-400 md:p-0 text-white">About
+                            <a href="/about" class="block py-2 px-3 md:hover:text-gray-400 md:p-0 text-white">About
                                 Us</a>
                         </li>
                         <li>
-                            <a href="#" class="block py-2 px-3 md:hover:text-gray-400 md:p-0 text-white">Shop</a>
+                            <a href="/shop" class="block py-2 px-3 md:hover:text-gray-400 md:p-0 text-white">Shop</a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="/services"
                                 class="block py-2 px-3 md:hover:text-gray-400 md:p-0 text-white">Services</a>
                         </li>
                         <li>
-                            <a href="#" class="block py-2 px-3 md:hover:text-gray-400 md:p-0 text-white">Contact
+                            <a href="/contactUs" class="block py-2 px-3 md:hover:text-gray-400 md:p-0 text-white">Contact
                                 Us</a>
                         </li>
                     </ul>
@@ -89,36 +89,29 @@
 
 
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
-        <!-- Carousel wrapper -->
-        <div class="relative overflow-hidden md:h-96">
-            <!-- Item 1 -->
+        <div class="relative overflow-hidden h-[499px]">
             <div class="duration-700 ease-in-out" data-carousel-item="active">
                 <img src="/images/slider 1.png"
-                    class="absolute block w-full h-96 bg-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                    class="absolute block w-full h-[499px] bg-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                     alt="...">
             </div>
-            <!-- Item 2 -->
             <div class="duration-700 ease-in-out" data-carousel-item>
-                <img src="/images/slider 1.png"
-                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <img src="/images/Member promotion.png"
+                    class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
-            <!-- Item 3 -->
             <div class="duration-700 ease-in-out" data-carousel-item>
                 <img src="/images/slider 1.png"
-                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
-            <!-- Item 4 -->
             <div class="duration-700 ease-in-out" data-carousel-item>
                 <img src="/images/slider 1.png"
-                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
-            <!-- Item 5 -->
             <div class="duration-700 ease-in-out" data-carousel-item>
                 <img src="/images/slider 1.png"
-                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
         </div>
-        <!-- Slider indicators -->
         <div
             class="absolute z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse bottom-5 left-1/2 carousel-indicators">
             <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
@@ -132,7 +125,6 @@
             <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5"
                 data-carousel-slide-to="4"></button>
         </div>
-        <!-- Slider controls -->
         <button type="button"
             class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
             data-carousel-prev>
@@ -160,9 +152,9 @@
             </span>
         </button>
     </div>
-    <div class="bg-black">
+    <div class="bg-[#141212] opacity-92">
         <br>
-        <h1 class="text-center text-2xl font-medium mt-4 text-white">New Arrivals</h1><br>
+        <h1 class="text-center text-2xl font-medium mt-4 text-white cursor-pointer">New Arrivals</h1><br>
             <div class="flex flex-wrap justify-center px-28">
                 <div class="w-1/3 p-2">
                     <div class="p-4">
@@ -217,7 +209,7 @@
                     </div>
                 </div>
                 <div class="w-1/3 p-2">
-                    <div class="bg-black p-4">
+                    <div class="p-4">
                         <div class="w-full">
                             <img src="images/new arrival skirt.jpg" alt=""
                                 class="w-full h-[26rem] object-cover">
@@ -243,26 +235,26 @@
                     </div>
                 </div>
                 <div>
-                    <button class="bg-white text-black rounded-lg p-2 px-4 mb-8">View All</button>
+                    <button class="bg-white text-black rounded-lg p-2 px-4 mb-8 font-semibold">View All</button>
                 </div>
             </div>
-            <div class="bg-gray-300">
+            <div class="bg-[#CDCDC5] opacity-92">
                 <br>
-                <h1 class="text-center text-2xl font-medium mt-4">Categories</h1><br><br>
+                <h1 class="text-center text-2xl font-medium mt-4 cursor-pointer">Categories</h1><br><br>
                 <div class="columns-2 px-10">
-                    <div class="relative px-4 hover:brightness-125 transition-all duration-800 ease-in-out">
+                    <div class="relative px-4 hover:brightness-125 transition-all duration-800 ease-in-out cursor-pointer">
                         <img src="images/categories women.jpg" alt=""
-                            class="w-full h-[38rem] object-cover brightness-50 drop-shadow-sm contrast-100 ">
+                            class="w-full h-[38rem] object-cover brightness-50 drop-shadow-sm contrast-100">
                         <div class="text-overlay absolute items-center justify-center flex inset-0">
                             <a href="#shop" class="relative group">
                                 <h2
-                                    class="text-3xl font-medium text-white opacity-80 tracking-widest after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-[-0.25rem]  after:bg-white after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-300 group-hover:after:scale-x-100 after:ease-in-out">
+                                    class="text-3xl font-medium text-white opacity-80 tracking-widest after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-[-0.25rem] after:bg-white after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-300 group-hover:after:scale-x-100 after:ease-in-out">
                                     WOMEN</h2>
                             </a>
                         </div>
                     </div>
                     <div class="w-full px-4">
-                        <div class="relative hover:brightness-125 transition-all duration-800 ease-in-out">
+                        <div class="relative hover:brightness-125 transition-all duration-800 ease-in-out cursor-pointer">
                             <img src="images/categories men.jpg" alt=""
                                 class="w-full h-[18rem] object-cover brightness-50 drop-shadow-sm contrast-100">
                             <div class="text-overlay absolute items-center justify-center flex inset-0">
@@ -273,7 +265,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="relative hover:brightness-125 transition-all duration-800 ease-in-out">
+                        <div class="relative hover:brightness-125 transition-all duration-800 ease-in-out cursor-pointer">
                             <img src="images/women accessories.jpg" alt=""
                                 class="w-full h-[18rem] object-cover mt-8 brightness-50 drop-shadow-sm contrast-100">
                             <div class="text-overlay absolute items-center justify-center flex inset-0">
@@ -285,7 +277,7 @@
                             </div>
                         </div>
                     </div>
-                </div><br>
+                </div><br><br>
 
                 <footer class="bg-black">
                     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
@@ -390,7 +382,7 @@
                     </div>
                     <hr>
                     <div class="mt-6 text-center mx-0">
-                        <span class="text-sm text-gray-500 dark:text-gray-300 sm:text-center">© 2024 <a
+                        <span class="text-sm text-[#CDCDC5] opacity-92 sm:text-center">© 2024 <a
                                 href="https://voguevista.com/">Vogue Vista</a>. All Rights Reserved.
                         </span>
                     </div><br>
