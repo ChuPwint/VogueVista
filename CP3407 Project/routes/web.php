@@ -11,6 +11,7 @@ use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
