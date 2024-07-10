@@ -39,23 +39,38 @@ input[type=number] {
                     @csrf
                     <div class="mb-5 w-full">
                         <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="John Smith" class="border border-black px-3 py-5 rounded-md w-full h-8" required>
+                        <input type="text" id="name" name="name" placeholder="John Smith" value="{{ old('name') }}" class="border border-black px-3 py-5 rounded-md w-full h-8" required>
+                        @error("name")
+                            <small class="text-red-500">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="mb-5 w-full">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="abc@gmail.com" class="border border-black px-3 py-5 rounded-md w-full h-8" required>
+                        <input type="email" id="email" name="email" placeholder="abc@gmail.com" value="{{ old('email') }}" class="border border-black px-3 py-5 rounded-md w-full h-8" required>
+                        @error("email")
+                            <small class="text-red-500">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="mb-5 w-full">
                         <label for="phone">Phone</label>
-                        <input type="text" id="phone" name="phone" placeholder="12345678" class="border border-black px-3 py-5 rounded-md w-full h-8">
+                        <input type="text" id="phone" name="phone" placeholder="12345678" value="{{ old('phone') }}" class="border border-black px-3 py-5 rounded-md w-full h-8">
+                        @error("phone")
+                            <small class="text-red-500">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="mb-5 w-full">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="" class="border border-black px-3 py-5 rounded-md w-full h-8" required>
+                        <input type="password" id="password" name="password" placeholder=""  class="border border-black px-3 py-5 rounded-md w-full h-8" required>
+                        @error("password")
+                            <small class="text-red-500">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class=" w-full">
-                        <label for="password2">Re-enter Password</label>
-                        <input type="password" id="password2" name="password2" placeholder="" class="border border-black px-3 py-5 rounded-md w-full h-8" required>
+                        <label for="password_confirmation">Re-enter Password</label>
+                        <input type="password" id="password_confirmation" name="password_confirmation" placeholder="" class="border border-black px-3 py-5 rounded-md w-full h-8" required>
+                        @error("password_confirmation")
+                            <small class="text-red-500">{{ $message }}</small>
+                        @enderror
                     </div>
                     
                     <div class="mt-8">

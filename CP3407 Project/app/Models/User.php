@@ -19,13 +19,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'c_name',
-        'c_email',
-        'c_password',
-        'c_profile',
-        'c_phone',
-        'c_address',
-        'c_postcode',
+        'name',
+        'email',
+        'password',
+        'profile',
+        'phone',
+        'address',
+        'postcode',
         'wishlist_id',
         'del_flg'
     ];
@@ -36,7 +36,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'c_password',
+        'password',
         'remember_token',
     ];
 
@@ -49,24 +49,50 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'c_password' => 'hashed',
+            'password' => 'hashed',
         ];
     }
 
-    public function createUser($request){
+    public function checkUser($email)
+    {
+        // Check if the email already exists in the users table
+        return User::where('email', $email)->first();
+    }
+
+    public function getLastWishlistId(){
         // Retrieve the last wishlist_id from the table
         $lastWishlist = DB::table('users')->orderBy('id', 'DESC')->first();
-
         // Determine the new wishlist_id
         $newWishlistId = $lastWishlist ? $lastWishlist->wishlist_id + 1 : 1;
-        
+        return $newWishlistId;
+    }
+
+    public function createUser($request)
+    {
+        $newWishlistId = $this->getLastWishlistId();
+
         DB::table('users')
             ->insert([
-                "c_name" => $request->name,
-                "c_email" => $request->email,
-                "c_phone" => $request->phone,
-                "c_password" => Hash::make($request->password),
+                "name" => $request->name,
+                "email" => $request->email,
+                "phone" => $request->phone,
+                "password" => Hash::make($request->password),
                 "wishlist_id" => $newWishlistId,
             ]);
+    }
+
+    public function createGoogleUser($name, $email, $password)
+    {
+        $newWishlistId = $this->getLastWishlistId();
+
+        DB::table('users')
+            ->insert([
+                "name" => $name,
+                "email" => $email,
+                "password" => Hash::make($password),
+                "wishlist_id" => $newWishlistId,
+            ]);
+
+        return User::where('email', $email)->first();
     }
 }

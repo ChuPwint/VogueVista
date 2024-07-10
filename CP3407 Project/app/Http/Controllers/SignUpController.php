@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SignupValidation;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -26,17 +27,15 @@ class SignUpController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SignupValidation $request)
     {
-        $request->validate([
-            "name" => "required|min:3|max:255|regex:/^[a-zA-Z]+$/",
-            "email" => "required",
-            "phone" => "required|max:10",
-            "password" => "required", 
-        ]);
         $userClass = new User();
-        $userClass->createUser($request);
-        return view("Login/finishSignUp");
+        if ($userClass->checkUser($request->email) == null) {
+            $userClass->createUser($request);
+            return view("Login/finishSignUp");
+        } else {
+            return redirect()->back()->withErrors(['email' => 'The email address is already registered.'])->withInput();
+        }
     }
 
     /**
@@ -44,7 +43,6 @@ class SignUpController extends Controller
      */
     public function show(string $id)
     {
-        dd('in show');
     }
 
     /**
