@@ -9,7 +9,7 @@
     @vite('resources/css/app.css')
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    
+
     @vite('resources/lib/jquery3.6.0.js')
     @vite('resources/js/shop.js')
 
@@ -29,8 +29,10 @@
 </style>
 
 <body>
-    {{-- Start of side bar --}}
-    <aside class="bg-black fixed top-0 left-0 z-40 w-64 h-screen transition-transform ">
+    @include('includes.navbar')
+    <div>
+        {{-- Start of side bar --}}
+    <aside class="bg-black fixed top-0 left-0 z-40 w-64 h-full transition-transform ">
         <div class="h-full px-3 py-4 overflow-y-auto bg-black text-white">
             <div class="space-y-2 font-medium">
                 <div>
@@ -343,6 +345,8 @@
             {{-- End of products --}}
         </div>
     </div>
+    </div>
+    @include('includes.footer')
 </body>
 
 </html>
