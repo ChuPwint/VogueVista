@@ -11,6 +11,7 @@ use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::resource('/shop', ShopController::class);
 Route::resource('/about', AboutController::class);
 Route::resource('/services', ServicesController::class);
 Route::resource('/contactUs', ContactUsController::class);
+Route::resource('/userProfile', UserProfileController::class);
 Route::resource('/cart', CartController::class);
 Route::resource('/checkout', CheckoutController::class);
 Route::resource('/payment', PaymentController::class);

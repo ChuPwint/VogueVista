@@ -105,21 +105,36 @@
 
         <div class="w-1/2">
             <div class="border bg-white border-black py-14 px-16 h-[480px] w-[680px]">
-            <form action="" class="align-center">
-                <div class="mb-3">
-                    <label for="full name" class="block mb-2">Full Name</label>
-                    <input type="text" class="block border border-black w-full h-10 p-2.5">
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="block mb-2">Email</label>
-                    <input type="text" class="block border border-black w-full h-10 p-2.5">
-                </div>
-                <div class="mb-3">
-                    <label for="message" class="block mb-2">Message</label>
-                    <textarea name="message" cols="30" rows="5" placeholder="Type your message..." class="block border border-black w-full h-24 p-2.5"></textarea>
-                </div>
-                <button type="submit" class="bg-black rounded-full text-l font-medium text-white py-2 px-4 mt-2">Contact Us</button>
-            </form>
+                <form action="{{ route('contactUs.store') }}" method="POST" class="align-center">
+                    @csrf
+                    @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                    <div class="mb-3">
+                        <label for="fullName" class="block mb-2">Full Name</label>
+                        <input type="text" name="fullName" id="fullName" class="block border border-black w-full h-10 p-2.5" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="block mb-2">Email</label>
+                        <input type="email" name="email" id="email" class="block border border-black w-full h-10 p-2.5" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="block mb-2">Message</label>
+                        <textarea name="message" id="message" cols="30" rows="5" placeholder="Type your message..." class="block border border-black w-full h-24 p-2.5" required></textarea>
+                    </div>
+                    <button type="submit" class="bg-black rounded-full text-l font-medium text-white py-2 px-4 mt-2">Contact Us</button>
+                </form>
 
         </div>
         <div class="w-full flex justify-center h-[540px] flex-col items-center">
