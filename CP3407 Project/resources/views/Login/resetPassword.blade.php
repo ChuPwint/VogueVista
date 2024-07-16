@@ -10,17 +10,18 @@
 </head>
 <style>
     /* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-/* Firefox */
-input[type=number] {
-    -moz-appearance: textfield;
-}
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
 </style>
+
 <body class="bg-light-gray w-screen h-screen flex">
     <div class="flex m-auto container text-black bg-white w-[80%]">
         {{-- image + logo --}}
@@ -44,16 +45,24 @@ input[type=number] {
                     @csrf
                     <div class="mb-5 w-full">
                         <label for="password">New Password</label>
-                        <input type="text" id="password" name="password" placeholder=""
+                        <input type="password" id="password" name="password" placeholder=""
                             class="border border-black px-3 py-5 rounded-md w-full h-8">
+                        @error('password')
+                            <small class="text-red-500">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="w-full">
-                        <label for="password1">Re-enter Password</label>
-                        <input type="text" id="password1" name="password1" placeholder=""
+                        <label for="password_confirmation">Re-enter Password</label>
+                        <input type="password" id="password_confirmation" name="password_confirmation" placeholder=""
                             class="border border-black px-3 py-5 rounded-md w-full h-8">
+                        @error('password_confirmation')
+                            <small class="text-red-500">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class=" mt-8">
-                        <button type="submit" class="w-full px-5 py-2 text-center bg-black rounded-md text-white text-xl font-semibold">Reset Password</button>
+                        <button type="submit"
+                            class="w-full px-5 py-2 text-center bg-black rounded-md text-white text-xl font-semibold">Reset
+                            Password</button>
                     </div>
                 </form>
             </div>

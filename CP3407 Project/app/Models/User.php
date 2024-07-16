@@ -59,7 +59,8 @@ class User extends Authenticatable
         return User::where('email', $email)->first();
     }
 
-    public function getLastWishlistId(){
+    public function getLastWishlistId()
+    {
         // Retrieve the last wishlist_id from the table
         $lastWishlist = DB::table('users')->orderBy('id', 'DESC')->first();
         // Determine the new wishlist_id
@@ -94,5 +95,12 @@ class User extends Authenticatable
             ]);
 
         return User::where('email', $email)->first();
+    }
+
+    public function updatePassword($email, $password)
+    {
+        return DB::table('users')
+            ->where('email', $email)
+            ->update(['password' => Hash::make($password)]);
     }
 }

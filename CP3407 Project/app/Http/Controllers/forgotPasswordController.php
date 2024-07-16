@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ForgotPasswordMail;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class forgotPasswordController extends Controller
 {
@@ -15,50 +20,64 @@ class forgotPasswordController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Send verification code to email.
      */
-    public function create()
+    public function sendVerificationCode(Request $request)
     {
-        //
+
+        $user = new User();
+        $userData = $user->checkUser($request->email);
+
+        if ($userData == null) {
+            return response()->json(['error' => 'User not found.'], 200);
+        } else {
+            // dd($userData);
+            $code = $this->generateCode(4);
+            // Store the code and email in the session
+            session(['verification_code' => $code, 'verification_email' => $request->email]);
+
+            $userName = $userData->name;
+            Mail::to($userData->email)->send(new ForgotPasswordMail($code, $userName));
+
+            return response()->json(['message' => 'Email sent successfully.']);
+            // return redirect("/resetPassword");
+        }
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create a verification code
+     */
+    public function generateCode($length)
+    {
+        $character = "0123456789";
+        $randomString = "";
+
+        for ($i = 0; $i < $length; $i++) {
+            $index = rand(0, strlen($character) - 1);
+            $randomString .= $character[$index];
+        }
+
+        return $randomString;
+    }
+
+    /**
+     * Verify code
      */
     public function store(Request $request)
     {
-        return redirect("/resetPassword");
-    }
+        $request->validate([
+            'email' => 'required|email',
+            'code' => 'required',
+        ]);
+        $userCode = $request->code;
+        $code = session("verification_code");
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        if ($userCode == $code) {
+            return redirect("/resetPassword");
+        } else {
+            return redirect()->back()->withErrors(
+                ['code' => 'Invalid verification code.']
+            );
+        }
     }
 }

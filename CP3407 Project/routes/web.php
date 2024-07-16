@@ -32,7 +32,11 @@ Route::withoutMiddleware('auth')->group(function () {
     Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
     Route::resource('/signup', SignUpController::class);
-    Route::resource('/forgotPassword', forgotPasswordController::class);
+
+    Route::get('/forgotPassword', [forgotPasswordController::class, 'index']);
+    Route::post('/forgotPassword/send', [forgotPasswordController::class, 'sendVerificationCode'])->name('sendCode');
+    Route::post('/forgotPassword/verify', [forgotPasswordController::class, 'store'])->name('verifyCode');
+    
     Route::resource('/resetPassword', ResetPasswordController::class);
     Route::get('/finishSignUp', function () {
         return view('finishSignUp');
