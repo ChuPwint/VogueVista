@@ -24,7 +24,9 @@ return new class extends Migration
             $table->integer('wishlist_id');
             $table->integer('del_flg')->default(0);
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
+            
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

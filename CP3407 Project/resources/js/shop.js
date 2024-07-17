@@ -52,6 +52,22 @@ $(document).ready(function () {
         }
     });
 
+    $('.shopSort').change(function() {
+        var sortBy = $(this).val();
+        console.log(sortBy);
+
+        $.ajax({
+            url: "{{ route('/shop/sort/{{ $sortBy }}}') }}",
+            type: "GET",
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+
     //Sorting
     // $("#dropdown").change(function () {
     //     console.log($(this).val());

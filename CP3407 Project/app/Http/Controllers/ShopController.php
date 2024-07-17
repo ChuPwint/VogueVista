@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Products;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -11,15 +12,24 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return view("/shop");
+        $product = new Products();
+        $allProduct = $product->showPaginate();
+        $count = count($product->showAll());
+        // dd($count);
+        // dd($allProduct[0]->category_id);
+        return view("/shop", [
+            'products' => $allProduct,
+            'count' => $count,
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function sortProducts(Request $request)
     {
-        //
+        return response()->json(['message' => 'route found.']);
+
     }
 
     /**

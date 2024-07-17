@@ -27,7 +27,7 @@ class User extends Authenticatable
         'address',
         'postcode',
         'wishlist_id',
-        'del_flg'
+        'del_flg',
     ];
 
     /**
