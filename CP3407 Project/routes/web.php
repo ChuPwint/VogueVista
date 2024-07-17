@@ -36,7 +36,7 @@ Route::withoutMiddleware('auth')->group(function () {
     Route::get('/forgotPassword', [forgotPasswordController::class, 'index']);
     Route::post('/forgotPassword/send', [forgotPasswordController::class, 'sendVerificationCode'])->name('sendCode');
     Route::post('/forgotPassword/verify', [forgotPasswordController::class, 'store'])->name('verifyCode');
-    
+
     Route::resource('/resetPassword', ResetPasswordController::class);
     Route::get('/finishSignUp', function () {
         return view('finishSignUp');
@@ -49,6 +49,7 @@ Route::withoutMiddleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::resource('/userProfile', UserProfileController::class);
     Route::resource('/cart', CartController::class);
     Route::resource('/checkout', CheckoutController::class);
     Route::resource('/payment', PaymentController::class);

@@ -9,8 +9,29 @@
     @vite('resources/css/app.css')
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @vite('resources/lib/jquery3.6.0.js')
 
 </head>
+<script>
+    $(document).ready(function() {
+                $(".like").click(function() {
+
+                    // Get the index of the clicked icon among all elements with class 'like'
+                    var index = $(".like").index(this);
+                    console.log(index);
+                    if ($(".like").eq(index).attr('name') == 'heart-outline') {
+                        // Fill color and change icon
+                        $(".like").eq(index).attr('name', 'heart');
+                        $(".like").eq(index).addClass("text-red-500");
+                    } else {
+                        // Fill color and change icon
+                        $(".like").eq(index).attr('name', 'heart-outline');
+                        $(".like").eq(index).removeClass("text-red-500");
+                    }
+                });
+    });
+</script>
 
 <body>
 
@@ -19,34 +40,36 @@
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
         <div class="relative overflow-hidden h-[600px]">
             <div class="duration-700 ease-in-out h-full" data-carousel-item="active">
-                <img src="/images/slider 1.png"
-                    class="relative h-full w-full"
-                    alt="...">
-                    <div class="absolute top-[48px] left-20 text-center">
-                        <div class="block mb-4">
-                            <span class="text-5xl font-bold tracking-widest bg-black text-white inline-block p-4">BLACK</span>
-                        </div>
-                        <div class="block mb-4">
-                            <span class="text-5xl font-bold tracking-widest bg-black text-white inline-block p-4 px-8">FRIDAY</span>
-                        </div>
-                        <div class="block mb-4">
-                            <span class="text-5xl font-bold tracking-widest bg-black text-white inline-block p-4">SALE</span>
-                        </div>
+                <img src="/images/slider 1.png" class="relative h-full w-full" alt="...">
+                <div class="absolute top-[48px] left-20 text-center">
+                    <div class="block mb-4">
+                        <span
+                            class="text-5xl font-bold tracking-widest bg-black text-white inline-block p-4">BLACK</span>
+                    </div>
+                    <div class="block mb-4">
+                        <span
+                            class="text-5xl font-bold tracking-widest bg-black text-white inline-block p-4 px-8">FRIDAY</span>
+                    </div>
+                    <div class="block mb-4">
+                        <span
+                            class="text-5xl font-bold tracking-widest bg-black text-white inline-block p-4">SALE</span>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-20 left-80">
+                    <div class="block mb-3">
+                        <span class="text-3xl font-medium tracking-widest text-white inline-block italic">UP TO </span>
                     </div>
 
-                    <div class="absolute bottom-20 left-80">
-                        <div class="block mb-3">
-                            <span class="text-3xl font-medium tracking-widest text-white inline-block italic">UP TO </span>
-                        </div>
+                    <span class="text-6xl font-bold  text-black block italic mb-5">50% <span class="text-xl">off</span>
+                    </span>
 
-                            <span class="text-6xl font-bold  text-black block italic mb-5">50% <span class="text-xl">off</span> </span>
-
-                        <div class="block">
-                            <span class="text-3xl font-regular  text-white inline-block">all summer collection</span>
-                        </div>
+                    <div class="block">
+                        <span class="text-3xl font-regular  text-white inline-block">all summer collection</span>
                     </div>
+                </div>
 
-                    <div class="absolute bottom-20 left-16 italic tracking-wider">
+                <div class="absolute bottom-20 left-16 italic tracking-wider">
                     <a href="/shop" class="text-3xl underline">Shop</a><br>
                     <a href="/shop" class="text-3xl underline mx-8">Now</a>
                 </div>
@@ -120,7 +143,8 @@
             <div class="w-1/3 p-2">
                 <div class="p-4">
                     <div class="w-full">
-                        <img src="images/new arrival dress.webp" alt="" class="w-full h-[26rem] object-cover">
+                        <img src="images/new arrival dress.webp" alt=""
+                            class="w-full h-[26rem] object-cover">
                         <div class="px-3 py-1 h-1/4 w-full mt-2">
                             <div class="flex justify-between items-center mb-2">
                                 <p class="text-white">Classic Velvet Dress</p>
@@ -130,7 +154,9 @@
                             </div>
                             <div class="flex justify-between items-center">
                                 <p class="text-white">$50</p>
-                                <button class="text-sm bg-white text-black px-2 py-1 rounded-md">Buy Now</button>
+                                <button
+                                    class="text-sm bg-white text-black px-2 py-1 rounded-md border hover:text-white hover:bg-transparent hover:border-white  transition duration-500">Buy
+                                    Now</button>
                             </div>
                         </div>
                     </div>
@@ -149,7 +175,9 @@
                             </div>
                             <div class="flex justify-between items-center  ">
                                 <p class="text-white">$50</p>
-                                <button class="text-sm bg-white text-black px-2 py-1 rounded-md">Buy Now</button>
+                                <button
+                                    class="text-sm bg-white text-black px-2 py-1 rounded-md border hover:text-white hover:bg-transparent hover:border-white  transition duration-500">Buy
+                                    Now</button>
                             </div>
                         </div>
                     </div>
@@ -163,12 +191,14 @@
                             <div class="flex justify-between items-center mb-2">
                                 <p class="text-white">Long Aesthetic Dress</p>
                                 <div class="flex justify-end text-xl text-white">
-                                    <ion-icon name="heart-outline" class=" like"></ion-icon>
+                                    <ion-icon name="heart-outline" class="like"></ion-icon>
                                 </div>
                             </div>
                             <div class="flex justify-between items-center  ">
                                 <p class="text-white">$70</p>
-                                <button class="text-sm bg-white text-black px-2 py-1 rounded-md">Buy Now</button>
+                                <button
+                                    class="text-sm bg-white text-black px-2 py-1 rounded-md border hover:text-white hover:bg-transparent hover:border-white  transition duration-500">Buy
+                                    Now</button>
                             </div>
                         </div>
                     </div>
@@ -176,8 +206,10 @@
             </div>
             <div class="mt-2">
                 <a href="/shop">
-                <button class="bg-white text-black rounded-lg p-2 px-4 mb-8 font-semibold">View All</button>
-            </a>
+                    <button
+                        class="bg-white text-black rounded-lg p-2 px-4 mb-8 font-semibold border hover:text-white hover:bg-transparent hover:border-white  transition duration-500">View
+                        All</button>
+                </a>
             </div>
         </div>
         <div class="bg-[#CDCDC5] opacity-92">
