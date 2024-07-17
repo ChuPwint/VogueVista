@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    @include('includes.navbar')
+    @include('includes.navbar', ['status' => $status])
 
     <div class="flex">
     <aside class="bg-black top-0 left-0 z-40 w-64 h-[89vh] transition-transform border-t border-white relative">
