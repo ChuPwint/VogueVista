@@ -29,7 +29,7 @@
 </style>
 
 <body>
-    @include('includes.navbar')
+    @include('includes.navbar', ['status' => $status])
     <div class="relative h-full">
         {{-- Start of side bar --}}
         <aside class="bg-black border-t border-white absolute top-0 left-0 z-40 w-64 h-full transition-transform ">
