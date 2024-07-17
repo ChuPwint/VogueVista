@@ -11,6 +11,7 @@ use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -18,9 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::withoutMiddleware('auth')->group(function () {
     // Home route
-    Route::get('/', function () {
-        return view('home');
-    });
+    Route::get('/', [HomeController::class, 'index']);
 
     //Login using info from signup
     // Route::resource('/login', LoginController::class);
