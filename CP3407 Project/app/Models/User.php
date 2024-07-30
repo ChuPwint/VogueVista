@@ -103,4 +103,20 @@ class User extends Authenticatable
             ->where('email', $email)
             ->update(['password' => Hash::make($password)]);
     }
+
+    public function deleteProfilePicture()
+    {
+        if ($this->profile_picture && Storage::exists($this->profile_picture)) {
+            Storage::delete($this->profile_picture);
+            $this->profile_picture = null;
+            $this->save();
+        }
+    }
+
+    public function updateProfilePicture($path)
+    {
+        $this->deleteProfilePicture();
+        $this->profile_picture = $path;
+        $this->save();
+    }
 }
