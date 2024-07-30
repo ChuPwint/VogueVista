@@ -35,7 +35,7 @@
 
 <body>
 
-    @include('includes.navbar', ['status' => $status])
+    @include('includes.navbar', ['status' => $status, "cartItems" => $cartItems])
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
         <div class="relative overflow-hidden h-[600px]">
             <div class="duration-700 ease-in-out h-full" data-carousel-item="active">

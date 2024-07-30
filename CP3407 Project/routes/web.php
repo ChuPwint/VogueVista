@@ -41,8 +41,8 @@ Route::withoutMiddleware('auth')->group(function () {
         return view('finishSignUp');
     });
 
-    Route::get('/shop', [ShopController::class, 'index']);
-    Route::get('/shop/sort/{sortBy}', [ShopController::class, 'sortProducts'])->name('sortProduct');
+    Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+    Route::get('/shop/sort', [ShopController::class, 'sortProducts'])->name('sortProduct');
     Route::resource('/about', AboutController::class);
     Route::resource('/services', ServicesController::class);
     Route::resource('/contactUs', ContactUsController::class);

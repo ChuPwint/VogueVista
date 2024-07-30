@@ -25,6 +25,8 @@
 </style>
 
 <body>
+    @include('includes.navbar', ['status' => $status, 'cartItems' => $cartItems])
+
     <div class="p-4">
         <div>
             <p class="font-semibold mb-6 text-2xl">Shopping Cart</p>
@@ -32,137 +34,97 @@
         </div>
         <div class="mt-5 px-5">
             <div class="relative overflow-x-auto shadow-md">
-                <table class="w-full text-sm text-left text-gray-500">
-                    <thead class="border-b border-b-light-gray border-opacity-25 text-gray-700">
-                        <tr>
-                            <th class="px-6 py-3">
-                                Description
-                            </th>
-                            <th class="px-6 py-3 text-center">
-                                Price
-                            </th>
-                            <th class="px-6 py-3 text-center">
-                                Quantity
-                            </th>
-                            <th class="px-6 py-3 text-center">
-                                Total Price
-                            </th>
-                            <th class="px-6 py-3 text-center">
-                                <span>Delete</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{-- Start of cart items --}}
-                        <tr class="bg-white border-b border-b-light-gray border-opacity-25 hover:bg-gray-50">
-                            <th class="px-6 py-4 font-medium flex items-center text-gray-900 whitespace-nowrap">
-                                <div class="w-20 h-20 flex justify-center items-center shadow-md">
-                                    <img class="h-full" src="/images/new arrival dress.webp" alt="">
-                                </div>
-                                <div class="ml-2">
-                                    <p class="text-lg font-medium">Casual Cotton Dress</p>
-                                    <p class="text-sm font-light text-light-gray">Size <span class="size">M</span>
-                                        (<span class="color">Black</span>)</p>
-                                </div>
-                            </th>
-                            <td class="px-6 py-4 text-lg text-center">
-                                $70
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <div class="flex justify-center items-center space-x-0">
-                                    <button
-                                        class="minusBtn cursor-pointer w-5 text-center py-[1px] font-semibold bg-gray-300 text-gray-500">-</button>
-                                    <input type="number" name="qty" value="1"
-                                        class="quantityInput text-center text-black w-10 border border-black" readonly>
-                                    <button
-                                        class="plusBtn cursor-pointer w-5 py-[1px] font-semibold text-center bg-gray-300 text-gray-500">+</button>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 text-lg text-center">
-                                $70
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <ion-icon name="trash-outline"
-                                    class="text-2xl hover:text-red-500 cursor-pointer"></ion-icon>
-                            </td>
-                        </tr>
-                        <tr class="bg-white border-b border-b-light-gray border-opacity-25 shadow-sm hover:bg-gray-50">
-                            <th class="px-6 py-4 font-medium flex items-center text-gray-900 whitespace-nowrap">
-                                <div class="w-20 h-20 flex justify-center items-center shadow-md">
-                                    <img class="h-full" src="/images/new arrival skirt.jpg" alt="">
-                                </div>
-                                <div class="ml-2">
-                                    <p class="text-lg font-medium">Classic Velvet Dress</p>
-                                    <p class="text-sm font-light text-light-gray">Size <span class="size">M</span>
-                                        (<span class="color">White</span>)</p>
-                                </div>
-                            </th>
-                            <td class="px-6 py-4 text-lg text-center">
-                                $90
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <div class="flex justify-center items-center space-x-0">
-                                    <button
-                                        class="minusBtn cursor-pointer w-5 text-center py-[1px] font-semibold bg-gray-300 text-gray-500">-</button>
-                                    <input type="number" name="qty" value="2"
-                                        class="quantityInput text-center text-black w-10 border border-black" readonly>
-                                    <button
-                                        class="plusBtn cursor-pointer w-5 py-[1px] font-semibold text-center bg-gray-300 text-gray-500">+</button>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 text-lg text-center">
-                                $90
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <ion-icon name="trash-outline"
-                                    class="text-2xl hover:text-red-500 cursor-pointer"></ion-icon>
-                            </td>
-                        </tr>
-                        <tr class="bg-white border-b border-b-light-gray border-opacity-25  hover:bg-gray-50">
-                            <th class="px-6 py-4 font-medium flex items-center text-gray-900 whitespace-nowrap">
-                                <div class="w-20 h-20 flex justify-center items-center shadow-md">
-                                    <img class="h-full w-full" src="/images/new arrival top.webp" alt="">
-                                </div>
-                                <div class="ml-2">
-                                    <p class="text-lg font-medium">Elegant Blouse</p>
-                                    <p class="text-sm font-light text-light-gray">Size <span class="size">S</span>
-                                        (<span class="color">White</span>)</p>
-                                </div>
-                            </th>
-                            <td class="px-6 py-4 text-lg text-center">
-                                $55
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <div class="flex justify-center items-center space-x-0">
-                                    <button
-                                        class="minusBtn cursor-pointer w-5 text-center py-[1px] font-semibold bg-gray-300 text-gray-500">-</button>
-                                    <input type="number" name="qty" value="2"
-                                        class="quantityInput text-center text-black w-10 border border-black" readonly>
-                                    <button
-                                        class="plusBtn cursor-pointer w-5 py-[1px] font-semibold text-center bg-gray-300 text-gray-500">+</button>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 text-lg text-center">
-                                $110
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <ion-icon name="trash-outline"
-                                    class="text-2xl hover:text-red-500 cursor-pointer"></ion-icon>
-                            </td>
-                        </tr>
-                        {{-- End of cart items --}}
-                    </tbody>
-                </table>
-            </div>
-            <form action="/checkout" method="get">
-                <div class="flex justify-end items-center px-4 mt-6">
-                    <div class=" mr-[75px]">
-                        Total (<span class="totalItems font-semibold text-lg">4</span> item(s)): <span
-                            class="totalPrice font-semibold text-lg">$250</span>
+                @if ($cartItems > 0)
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="border-b border-b-light-gray border-opacity-25 text-gray-700">
+                            <tr>
+                                <th class="px-6 py-3">
+                                    Description
+                                </th>
+                                <th class="px-6 py-3 text-center">
+                                    Price
+                                </th>
+                                <th class="px-6 py-3 text-center">
+                                    Quantity
+                                </th>
+                                <th class="px-6 py-3 text-center">
+                                    Total Price
+                                </th>
+                                <th class="px-6 py-3 text-center">
+                                    <span>Delete</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{-- Start of cart items --}}
+                            @foreach ($allItems as $item)
+                                <tr class="bg-white border-b border-b-light-gray border-opacity-25 hover:bg-gray-50">
+                                    <th class="px-6 py-4 font-medium flex items-center text-gray-900 whitespace-nowrap">
+                                        <div class="w-20 h-20 flex justify-center items-center shadow-md">
+                                            <img class="h-full" src="{{ $item->products->p_photo }}" alt="">
+                                        </div>
+                                        <div class="ml-2">
+                                            <p class="text-lg font-medium">{{ $item->products->pname }}</p>
+                                            <p class="text-sm font-light text-light-gray">Size <span
+                                                    class="size">{{ $item->products->size }}</span>
+                                        </div>
+                                    </th>
+                                    <td class="px-6 py-4 text-lg text-center">
+                                        ${{ $item->products->price }}
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <form action="{{ route('cart.update', $item->products->id) }}" method="post">
+                                            @csrf
+                                            @method('PATCH')
+                                            <div class="flex justify-center items-center space-x-0">
+                                                <button type="submit" name="action" value="decrease"
+                                                    class="minusBtn cursor-pointer w-5 text-center py-[1px] font-semibold bg-gray-300 text-gray-500"
+                                                    {{ $item->quantity == 1 ? 'disabled' : '' }}>-</button>
+                                                <input type="number" name="qty" value="{{ $item->quantity }}"
+                                                    class="quantityInput text-center text-black w-10 border border-black"
+                                                    readonly>
+                                                <button type="submit" name="action" value="increase"
+                                                    class="plusBtn cursor-pointer w-5 py-[1px] font-semibold text-center bg-gray-300 text-gray-500"
+                                                    {{ $item->quantity == $item->products->stock ? 'disabled' : '' }}>+</button>
+                                            </div>
+                                        </form>
+                                    </td>
+                                    @php
+                                        $total = $item->products->price * $item->quantity;
+                                    @endphp
+                                    <td class="px-6 py-4 text-lg text-center">
+                                        ${{ $total }}
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <ion-icon name="trash-outline"
+                                            class="text-2xl text-red-500 cursor-pointer"></ion-icon>
+                                    </td>
+                                </tr>
+                                {{-- End of cart items --}}
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <div class="text-center text-2xl ">
+                        <p
+                            class="px-6 py-4 font-medium flex justify-center items-center text-gray-900 whitespace-nowrap">
+                            Your Cart is
+                            Empty!</p>
                     </div>
-                    <button type="submit" class="px-4 py-2 bg-black text-white rounded-sm">Proceed to checkout</button>
-                </div>
-            </form>
+                @endif
+            </div>
+            @if ($cartItems > 0)
+                <form action="/checkout" method="get">
+                    <div class="flex justify-end items-center px-4 mt-6">
+                        <div class=" mr-[75px]">
+                            Total (<span class="totalItems font-semibold text-lg">{{ $cartItems }}</span> item(s)):
+                            <span class="totalPrice font-semibold text-lg">${{ $totalPrice }}</span>
+                        </div>
+                        <button type="submit" class="px-4 py-2 bg-black text-white rounded-sm">Proceed to
+                            checkout</button>
+                    </div>
+                </form>
+            @endif
         </div>
     </div>
 </body>
