@@ -10,7 +10,9 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-    @vite('resources/lib/jquery3.6.0.js')
+    {{-- @vite('resources/lib/jquery3.6.0.js') --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     @vite('resources/js/shop.js')
 
 </head>
@@ -27,9 +29,88 @@
         -moz-appearance: textfield;
     }
 </style>
+<script>
+    $(document).ready(function() {
+        // Handle sort change
+        $('.shopSort').change(function() {
+            var sortBy = $(this).val();
+            var url = "{{ route('sortProduct') }}";
+            loadProducts(url, sortBy);
+        });
+
+        function loadProducts(url, sortBy) {
+            $.ajax({
+                url: url,
+                method: 'GET',
+                data: {
+                    sortBy: sortBy,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    var products = data.products.data;
+                    var links = data.links;
+                    $('.productList').empty();
+
+                    var productCard = `
+                    <div class="mt-4">
+                        <div class="flex justify-between items-center">
+                    `;
+
+                    products.forEach((product, index) => {
+                        if (index % 4 == 0 && index != 0) {
+                            productCard += `
+                                            </div>
+                                            <div class="mt-5 flex items-center ${products.length - index < 4 ? 'justify-start' : 'justify-between'}">
+                                        `;
+                        }
+                        productCard += `
+                                        <div class="mr-20 products">
+                                            <div class="w-56 h-[320px] rounded-md shadow-md shadow-gray-300 hover:cursor-pointer hover:scale-[1.03] transition-transform mb-4">
+                                                <div class="w-full h-3/4">
+                                                    <img class="object-cover w-full h-full" src="${product.p_photo}" alt="${product.pname}">
+                                                </div>
+                                                <div class="px-3 py-1 h-1/4 w-full shadow-lg">
+                                                    <div class="flex justify-between items-center mb-2">
+                                                        <p class="text-lg font-medium">${product.pname}</p>
+                                                        <div class="flex justify-end text-xl">
+                                                            <ion-icon name="heart-outline" class="like"></ion-icon>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex justify-between items-center">
+                                                        <p class="font-medium">$${product.price}</p>
+                                                        <button class="buyNow text-sm bg-black text-white px-2 py-1 rounded-md hover:text-black hover:bg-white hover:border hover:border-black" data-product-id="${product.id}">Buy Now</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `;
+                    });
+                    productCard += `
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 pagination">
+                                        ${links}
+                                    </div>
+                                `;
+                    $('.productList').append(productCard);
+
+                    // Rebind the click event for pagination links
+                    $('.pagination a').on('click', function(e) {
+                        e.preventDefault();
+                        var url = $(this).attr('href');
+                        loadProducts(url, sortBy);
+                    });
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+    });
+</script>
 
 <body>
-    @include('includes.navbar', ['status' => $status])
+    @include('includes.navbar', ['status' => $status , "cartItems" => $cartItems])
     <div class="relative h-full">
         {{-- Start of side bar --}}
         <aside class="bg-black border-t border-white absolute top-0 left-0 z-40 w-64 h-full transition-transform ">
@@ -179,61 +260,70 @@
                     </div>
                     {{-- End of Sort by --}}
                 </div>
-                {{-- Start of products --}}
-                <div class="mt-4">
-                    <div class="flex justify-between items-center">
-                        @foreach ($products as $index => $product)
-                            @if ($index % 4 == 0)
-                                {{-- Next row --}}
-                                @if ($index != 0)
-                    </div>
-                    @php
-                        $last = count($products) - $index < 4 ? true : false;
-                    @endphp
-                    <div @class([
-                        'mt-5',
-                        'flex',
-                        'items-center',
-                        'justify-start' => $last,
-                        'justify-between' => !$last,
-                    ])>
-                        @endif
-                        @endif
+                <div class="productList">
+                    {{-- Start of products --}}
+                    <div class="mt-4">
+                        <div class="flex justify-between items-center">
+                            @foreach ($products as $index => $product)
+                                @if ((int) $index % 4 == 0)
+                                    {{-- Next row --}}
+                                    @if ((int) $index != 0)
+                        </div>
                         @php
-                            $last2 = $loop->remaining < 2 ? true : false;
-                            $lastProduct = $index == $count - 1 ? true : false;
+                            $last = count($products) - (int) $index < 4 ? true : false;
                         @endphp
                         <div @class([
-                            'mr-20' => $last2 && $lastProduct,
+                            'mt-5',
+                            'flex',
+                            'items-center',
+                            'justify-start' => $last,
+                            'justify-between' => !$last,
                         ])>
-                            <div
-                                class="w-56 h-[320px] rounded-md shadow-md shadow-gray-300 hover:cursor-pointer hover:scale-[1.03] transition-transform mb-4">
-                                <div class="w-full h-3/4">
-                                    <img class="object-cover w-full h-full" src="{{ $product->p_photo }}"
-                                        alt="{{ $product->pname }}">
-                                </div>
-                                <div class="px-3 py-1 h-1/4 w-full shadow-lg">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <p class="text-lg font-medium">{{ $product->pname }}</p>
-                                        <div class="flex justify-end text-xl">
-                                            <ion-icon name="heart-outline" class="like"></ion-icon>
-                                        </div>
+                            @endif
+                            @endif
+                            @php
+                                $last2 = $loop->remaining < 2 ? true : false;
+                                $lastProduct = (int) $index == $count - 1 ? true : false;
+                            @endphp
+                            <div @class([
+                                'mr-20' => $last2 && $lastProduct,
+                                'products',
+                            ])>
+                                <div
+                                    class="w-56 h-[320px] rounded-md shadow-md shadow-gray-300 hover:cursor-pointer hover:scale-[1.03] transition-transform mb-4">
+                                    <div class="w-full h-3/4">
+                                        <img class="object-cover w-full h-full" src="{{ $product->p_photo }}"
+                                            alt="{{ $product->pname }}">
                                     </div>
-                                    <div class="flex justify-between items-center">
-                                        <p class="font-medium">${{ $product->price }}</p>
-                                        <button
-                                            class="text-sm bg-black text-white px-2 py-1 rounded-md hover:text-black hover:bg-white hover:border hover:border-black">Buy
-                                            Now</button>
+                                    <div class="px-3 py-1 h-1/4 w-full shadow-lg">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <p class="text-lg font-medium">{{ $product->pname }}</p>
+                                            <div class="flex justify-end text-xl">
+                                                <ion-icon name="heart-outline" class="like"></ion-icon>
+                                            </div>
+                                        </div>
+                                        <form action="{{ route('cart.store') }}" method="POST" >
+                                            @csrf
+                                            <input type="hidden" name="productId" value=" {{ $product->id }}">
+                                            <input type="hidden" name="quantity" value=1>
+                                            <div class="flex justify-between items-center">
+                                                <p class="font-medium">${{ $product->price }}</p>
+                                                <button
+                                                    type="submit"
+                                                    class="buyNow text-sm bg-black text-white px-2 py-1 rounded-md hover:text-black hover:bg-white hover:border hover:border-black"
+                                                    >Add to Cart</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
-                        @endforeach
                     </div>
-                </div>
-                {{-- End of products --}}
-                <div class="mt-4">
-                    {{ $products->links() }}
+                    {{-- End of products --}}
+                    <div class="mt-4 pagination">
+                        {{ $products->links() }}
+                    </div>
                 </div>
             </div>
         </div>

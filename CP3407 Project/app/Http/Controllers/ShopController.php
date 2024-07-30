@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,79 +16,50 @@ class ShopController extends Controller
     public function index()
     {
         $status = "logOut";
-        $others = "string";
-        Log::alert("not logged in", ["info" => $status]);
-
+        $cartItems = 0;
         if (Auth::check()) {
             $status = "logIn";
-            Log::info('User is logged in', ['user' => Auth::user()]);
-        } else {
-            Log::info('User is not logged in', ["info" => $status]);
-            $status = "logOut";
-            Log::info('User is not logged in', ["info" => $status]);
-
+            $cart = new Cart();
+            $cartItems = $cart->getItemCount(Auth::id());
         }
 
-        Log::info('Logged In Status:', ['info' => $status]);
-        Log::alert("after", ["info" => $status]);
+        // dd($cartItems);
         $product = new Products();
         $allProduct = $product->showPaginate();
+        //product count
         $count = count($product->showAll());
+
         // dd($count);
         // dd($allProduct[0]->category_id);
+
         return view("/shop", [
             'status' => $status,
+            'cartItems' => $cartItems,
             'products' => $allProduct,
             'count' => $count,
         ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Sort the products
      */
     public function sortProducts(Request $request)
     {
-        return response()->json(['message' => 'route found.']);
+        $sortValue = $request->sortBy;
+        $productModel = new Products();
+        if ($sortValue == "Lowest Price") {
+            $products = $productModel->sortByLowestPrice();
+        } else if ($sortValue == "Highest Price") {
+            $products = $productModel->sortByHighestPrice();
+        } else if ($sortValue == "Newest") {
+            $products = $productModel->sortByNewest();
+        } else {
+            $products = $productModel->sortByLowestPrice();
+        }
 
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json([
+            'products' => $products,
+            'links' => (string) $products->links(),
+        ]);
     }
 }

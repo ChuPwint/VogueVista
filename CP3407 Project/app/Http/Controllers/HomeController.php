@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -12,25 +13,19 @@ class HomeController extends Controller
     public function index()
     {
         $status = "logOut";
-        $others = "string";
-        Log::alert("not logged in", ["info" => $status]);
 
         if (Auth::check()) {
             $status = "logIn";
-            Log::info('User is logged in', ['user' => Auth::user()]);
+            $cart = new Cart();
+            $cartItems = $cart->getItemCount(Auth::id());
         } else {
-            Log::info('User is not logged in', ["info" => $status]);
             $status = "logOut";
-            Log::info('User is not logged in', ["info" => $status]);
-
+            $cartItems = 0;
         }
-
-        Log::info('Logged In Status:', ['info' => $status]);
-        Log::alert("after", ["info" => $status]);
 
         return view("home", [
             'status' => $status,
-            'others' => $others,
+            'cartItems' => $cartItems,
         ]);
     }
 }
