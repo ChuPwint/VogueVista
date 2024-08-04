@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
@@ -11,15 +13,30 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        return view("checkout");
-    }
+        $cart = new Cart();
+        $totalPrice = 0;
+        $cartItemCount = 0;
+        if (Auth::check()) {
+            $status = "logIn";
+            $userId = Auth::id();
+            $cartItems = $cart->getAllItems($userId);
+            $cartItemCount = $cart->getItemCount($userId);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+            // Calculate the total price
+            foreach ($cartItems as $item) {
+                $totalPrice += $item->products->price * $item->quantity;
+            }
+        } else {
+            $status = "logOut";
+            $cartItems = [];
+        }
+        
+        return view("checkout", [
+            "allItems" => $cartItems,
+            'status' => $status,
+            'cartItems' => $cartItemCount,
+            "totalPrice" => $totalPrice,
+        ]);
     }
 
     /**
@@ -27,16 +44,18 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd("inside store");
+        $request->validate([
+            'deliName' => 'required|string',
+            'address' => 'required',
+            'region' => 'required|regex:/^[\pL\s]+$/u',
+            'postalCode' => 'required|digits:6',
+            'phone' => 'required|digits:8',
+        ]);
+        $request->session()->put('shipping_details', $request->only(['deliName', 'address', 'region', 'postalCode', 'phone']));
+        return redirect()->route("payment.index");
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.

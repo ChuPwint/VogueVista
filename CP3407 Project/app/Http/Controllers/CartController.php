@@ -30,7 +30,7 @@ class CartController extends Controller
             $status = "logOut";
             $cartItems = [];
         }
-
+        
         return view("cart", [
             "allItems" => $cartItems,
             'status' => $status,
@@ -83,6 +83,13 @@ class CartController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // dd($id, "in destroy");
+        $cart = new Cart();
+        $cartItem = $cart->checkItem(Auth::id(), $id);
+        if($cartItem){
+            $cart->deleteItem(Auth::id(), $id);
+        }
+        // dd($cartItem);
+        return redirect()->route("cart.index");
     }
 }
