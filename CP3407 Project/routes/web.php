@@ -16,6 +16,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\ThankYouController;
+use App\Http\Controllers\OrderHistoryController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -54,6 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/userProfile', UserProfileController::class);
     Route::post('/update-profile', [UserProfileController::class, 'updateProfile'])->name('updateProfile');
     Route::resource('/favorites', FavoritesController::class);
+    Route::resource('/orderHistory', OrderHistoryController::class);
+    Route::resource('/products', ProductsController::class);
     Route::resource('/cart', CartController::class);
     Route::resource('/checkout', CheckoutController::class);
     Route::resource('/payment', PaymentController::class);

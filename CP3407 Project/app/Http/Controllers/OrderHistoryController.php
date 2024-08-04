@@ -7,19 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
-class FavoritesController extends Controller
+class OrderHistoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    // public function index()
-    // {
-    //     $product = new Products();
-    //     $allProduct = $product->showAll();
-    //     return view("/favorites", [
-    //         "product" => $allProduct
-    //     ]);
-    // }
 
     public function index()
     {
@@ -33,7 +22,7 @@ class FavoritesController extends Controller
 
         Log::info('Logged In Status:', ['info' => $status]);
 
-        return view('favorites', [
+        return view('orderHistory', [
             'status' => $status,
         ]);
     }
