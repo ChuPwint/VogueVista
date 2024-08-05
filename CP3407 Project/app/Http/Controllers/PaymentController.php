@@ -48,6 +48,8 @@ class PaymentController extends Controller
     {
         $shippingDetails = session("shipping_details");
         // dd($request->action, $request->inCart, $shippingDetails);
+        $request->session()->put('orderItems', $request->inCart);
+
         $deliName = $shippingDetails["deliName"];
         $address = $shippingDetails["address"];
         $region = $shippingDetails["region"];
@@ -61,6 +63,7 @@ class PaymentController extends Controller
         }else if($request->action == "card"){
             $paymentMethod = 2;
         }
+        $request->session()->put('paymentMethod', $request->action);
 
         $order = $orderClass->createOrder(Auth::id(), $paymentMethod, $request->total, $deliName, $address, $region, $postalCode, $phone);
         

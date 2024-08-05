@@ -87,20 +87,20 @@
                             <div class="mb-4">
                                 <div class="font-semibold text-lg">Billing Information:</div>
                                 <div>
-                                    <p> <span>Adam Smith</span></p>
-                                    <p> <span>ABC address, no.5 street avenue, 123456</span></p>
+                                    <p> <span>{{ $billingInfo['deliName'] }}</span></p>
+                                    <p> <span>{{ $billingInfo['address'] }}, {{ $billingInfo['postalCode'] }}</span></p>
                                 </div>
                             </div>
                             <div class="mb-4">
                                 <div class="font-semibold text-lg">Payment Information:</div>
                                 <div>
-                                    <p> <span>Cash on delivery</span></p>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="font-semibold text-lg">Shipping Information:</div>
-                                <div>
-                                    <p> <span>Estimated arrival on 11.1.2080</span></p>
+                                    <p> <span>
+                                        @if ($paymentMethod == "cash")
+                                            Cash On Delivery
+                                        @else
+                                            Paid by card
+                                        @endif
+                                    </span></p>
                                 </div>
                             </div>
                         </div>

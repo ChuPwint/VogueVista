@@ -15,11 +15,18 @@ class ThankYouController extends Controller
         if (Auth::check()) {
             $status = "logIn";
             $userId = Auth::id();
-            $cartItems = $cart->getAllItems($userId);
-            $cartItemCount = $cart->getItemCount($userId);
+            $cartItems = session("orderItems");
+            $billingInfo = session("shipping_details");
+            // dd($billingInfo['deliName']);
+            $paymentMethod = session("paymentMethod");
 
+            $inCart = json_decode($cartItems); // Decode JSON string to an array
+
+            $cartItemCount = count($inCart);
+            $cartObject = (object) $inCart;
+            
             // Calculate the total price
-            foreach ($cartItems as $item) {
+            foreach ($cartObject as $item) {
                 $totalPrice += $item->products->price * $item->quantity;
             }
         } else {
@@ -28,10 +35,12 @@ class ThankYouController extends Controller
         }
         
         return view("thankyou", [
-            "allItems" => $cartItems,
+            "allItems" => $inCart,
             'status' => $status,
             'cartItems' => $cartItemCount,
             "totalPrice" => $totalPrice,
+            "paymentMethod" => $paymentMethod,
+            "billingInfo" => $billingInfo,
         ]);
     }
 }
