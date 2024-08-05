@@ -20,5 +20,16 @@ class OrderDetail extends Model
         return $this->belongsTo(Order::class, 'order_id', 'id');
     }
 
-    
+    public function product()
+    {
+        return $this->belongsTo(Products::class, 'product_id', 'id');
+    }
+
+    public function getAllOrderDetails($orderId){
+        $orderDetails = OrderDetail::where('order_id', $orderId)
+                            ->with('product')
+                            ->get();
+
+        return $orderDetails;
+    }
 }

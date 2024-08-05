@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    @include('includes.navbar', ['status' => $status])
+    @include('includes.navbar', ['status' => $status, "cartItems" => $cartItems])
 
     <div class="flex">
         @include('profile.sidebar', ['status' => $status])
@@ -56,7 +56,7 @@
                         </div>
                         <div>
                             <label class="block text-gray-700">Email</label>
-                            <input type="email" name="email" value="{{ Auth::user()->email }}" class="w-[90%] mt-1 p-2 border border-gray-300 rounded">
+                            <input type="email" name="email" value="{{ Auth::user()->email }}" class="w-[90%] mt-1 p-2 border border-gray-300 rounded" readonly>
                         </div>
                         <div>
                             <label class="block text-gray-700">Address</label>

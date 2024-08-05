@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 
+use App\Models\Cart;
+use App\Models\Products;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -13,18 +15,25 @@ class UserProfileController extends Controller
 {
     public function index()
     {
-        $status = Auth::check() ? "logIn" : "logOut";
-
+        $status = "logOut";
+        $cartItems = 0;
         if (Auth::check()) {
-            Log::info('User is logged in', ['user' => Auth::user()]);
-        } else {
-            Log::info('User is not logged in', ['info' => $status]);
+            $status = "logIn";
+            $cart = new Cart();
+            $cartItems = $cart->getItemCount(Auth::id());
         }
 
-        Log::info('Logged In Status:', ['info' => $status]);
+        // dd($cartItems);
+        $product = new Products();
+        $allProduct = $product->showPaginate();
+        //product count
+        $count = count($product->showAll());
 
         return view('userProfile', [
             'status' => $status,
+            'cartItems' => $cartItems,
+            'products' => $allProduct,
+            'count' => $count,
         ]);
     }
 

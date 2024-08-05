@@ -2,30 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\Products;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use App\Models\Order;
 
 class OrderHistoryController extends Controller
 {
     public function index()
     {
-        $status = Auth::check() ? "logIn" : "logOut";
+        $status = "logOut";
+        $cartItems = 0;
+        $orders = [];
 
         if (Auth::check()) {
-            Log::info('User is logged in', ['user' => Auth::user()]);
-        } else {
-            Log::info('User is not logged in', ['info' => $status]);
+            $status = "logIn";
+            $cart = new Cart();
+            $cartItems = $cart->getItemCount(Auth::id());
+
+            $order = new Order();
+            $allOrder = $order->getAllOrder(Auth::id());
+            // dd(Auth::id());
+            // dd($allOrder);
+            // dd($allOrder[0]->id);
+            $orderDetail = new OrderDetail();
+            $orderHistory = $orderDetail->getAllOrderDetails($allOrder[0]->id);
+            // dd($orderHistory[0]);
+            // dd($orderHistory[0]->product->pname);
         }
-
-        Log::info('Logged In Status:', ['info' => $status]);
-
-        $orders = Auth::check() ? Auth::user()->orders()->orderBy('order_date', 'desc')->get() : [];
 
         return view('orderHistory', [
             'status' => $status,
-            'orders' => $orders
+            'cartItems' => $cartItems,
+            'orders' => $allOrder,
+            'orderDetails' => $orderHistory,
         ]);
     }
 }

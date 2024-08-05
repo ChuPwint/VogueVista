@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Products;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -12,29 +12,20 @@ class FavoritesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index()
-    // {
-    //     $product = new Products();
-    //     $allProduct = $product->showAll();
-    //     return view("/favorites", [
-    //         "product" => $allProduct
-    //     ]);
-    // }
 
     public function index()
     {
-        $status = Auth::check() ? "logIn" : "logOut";
-
+        $status = "logOut";
+        $cartItems = 0;
         if (Auth::check()) {
-            Log::info('User is logged in', ['user' => Auth::user()]);
-        } else {
-            Log::info('User is not logged in', ['info' => $status]);
+            $status = "logIn";
+            $cart = new Cart();
+            $cartItems = $cart->getItemCount(Auth::id());
         }
 
-        Log::info('Logged In Status:', ['info' => $status]);
-
-        return view('favorites', [
+        return view("/favorites", [
             'status' => $status,
+            'cartItems' => $cartItems
         ]);
     }
 }

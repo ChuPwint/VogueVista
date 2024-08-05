@@ -17,6 +17,7 @@ class Order extends Model
         'region',
         'postalCode',
         'phone',
+        'del_flg'
     ];
 
     public function orderDetails()
@@ -44,4 +45,9 @@ class Order extends Model
             $cartItems
         );
     }
+
+    public function getAllOrder($userId){
+        return Order::where('user_id', $userId)->get();
+    }
+
 }

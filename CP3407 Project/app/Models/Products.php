@@ -23,6 +23,11 @@ class Products extends Model
         return $this->hasMany(Cart::class, 'product_id');
     }
 
+    public function orderDetail()
+    {
+        return $this->hasMany(OrderDetail::class, 'product_id');
+    }
+
     //show 12 products in a page
     public function showPaginate()
     {

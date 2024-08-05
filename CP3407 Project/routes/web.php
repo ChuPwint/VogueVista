@@ -64,6 +64,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('/cart', CartController::class);
     Route::resource('/checkout', CheckoutController::class);
     Route::resource('/payment', PaymentController::class);
-    Route::resource('/wishlist', WishlistController::class);
     Route::get('/thankyou', [ThankYouController::class, 'index'])->name('thankyou');
 });

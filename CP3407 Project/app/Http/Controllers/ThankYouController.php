@@ -17,14 +17,14 @@ class ThankYouController extends Controller
             $userId = Auth::id();
             $cartItems = session("orderItems");
             $billingInfo = session("shipping_details");
-            // dd($billingInfo['deliName']);
             $paymentMethod = session("paymentMethod");
 
             $inCart = json_decode($cartItems); // Decode JSON string to an array
 
-            $cartItemCount = count($inCart);
+            $cart = new Cart();
+            $cartItemCount = $cart->getItemCount($userId);
             $cartObject = (object) $inCart;
-            
+
             // Calculate the total price
             foreach ($cartObject as $item) {
                 $totalPrice += $item->products->price * $item->quantity;
@@ -33,7 +33,7 @@ class ThankYouController extends Controller
             $status = "logOut";
             $cartItems = [];
         }
-        
+
         return view("thankyou", [
             "allItems" => $inCart,
             'status' => $status,
