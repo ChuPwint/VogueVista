@@ -70,12 +70,13 @@
                                         </div>
                                     </th>
                                     <td class="px-6 py-4 text-lg text-center">
-                                        ${{ $item->products->price }}
+                                        ${{ number_format($item->products->price) }}
                                     </td>
                                     <td class="px-6 py-4 text-center">
                                         <form action="{{ route('cart.update', $item->products->id) }}" method="post">
                                             @csrf
                                             @method('PATCH')
+                                            
                                             <div class="flex justify-center items-center space-x-0">
                                                 <button type="submit" name="action" value="decrease"
                                                     class="minusBtn cursor-pointer w-5 text-center py-[1px] font-semibold bg-gray-300 text-gray-500"
@@ -93,11 +94,17 @@
                                         $total = $item->products->price * $item->quantity;
                                     @endphp
                                     <td class="px-6 py-4 text-lg text-center">
-                                        ${{ $total }}
+                                        ${{ number_format($total) }}
                                     </td>
                                     <td class="px-6 py-4 text-center">
-                                        <ion-icon name="trash-outline"
-                                            class="text-2xl text-red-500 cursor-pointer"></ion-icon>
+                                        <form action="{{ route('cart.destroy', $item->products->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit">
+                                            <ion-icon name="trash-outline"
+                                                class="text-2xl text-red-500 cursor-pointer"></ion-icon>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 {{-- End of cart items --}}
@@ -118,7 +125,7 @@
                     <div class="flex justify-end items-center px-4 mt-6">
                         <div class=" mr-[75px]">
                             Total (<span class="totalItems font-semibold text-lg">{{ $cartItems }}</span> item(s)):
-                            <span class="totalPrice font-semibold text-lg">${{ $totalPrice }}</span>
+                            <span class="totalPrice font-semibold text-lg">${{ number_format($totalPrice) }}</span>
                         </div>
                         <button type="submit" class="px-4 py-2 bg-black text-white rounded-sm">Proceed to
                             checkout</button>

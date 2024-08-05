@@ -16,7 +16,6 @@ class Products extends Model
         'p_detail',
         'price',
         'size',
-        
     ];
 
     public function carts()

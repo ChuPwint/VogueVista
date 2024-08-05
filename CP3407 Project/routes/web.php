@@ -16,6 +16,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\ThankYouController;
 use App\Http\Controllers\OrderHistoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -64,7 +65,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('/checkout', CheckoutController::class);
     Route::resource('/payment', PaymentController::class);
     Route::resource('/wishlist', WishlistController::class);
-    Route::get('/thankyou', function () {
-        return view('thankyou');
-    });
+    Route::get('/thankyou', [ThankYouController::class, 'index'])->name('thankyou');
 });

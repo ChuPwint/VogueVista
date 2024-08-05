@@ -24,7 +24,8 @@ class Cart extends Model
     public function getAllItems($userId)
     {
         return Cart::where('user_id', $userId)
-            ->with('products:id,pname,price,p_photo,size')
+            ->where('del_flg', 0)
+            ->with('products:id,pname,price,p_photo,size,stock')
             ->get();
     }
 
@@ -32,6 +33,7 @@ class Cart extends Model
     {
         return Cart::where('user_id', $userId)
             ->where('product_id', $productId)
+            ->where('del_flg', 0)
             ->first();
     }
 
@@ -48,17 +50,32 @@ class Cart extends Model
     {
         return Cart::where('user_id', $userId)
             ->where('product_id', $productId)
+            ->where('del_flg', 0)
             ->update(['quantity' => $quantity + 1]);
     }
 
     public function getItemCount($userId)
     {
-        return Cart::where("user_id", $userId)->count();
+        return Cart::where("user_id", $userId)
+                    ->where("del_flg", 0)
+                    ->count();
     }
 
     public function reduceItemQty($userId, $productId, $quantity){
         return Cart::where('user_id', $userId)
             ->where('product_id', $productId)
+            ->where('del_flg', 0)
             ->update(['quantity' => $quantity - 1]);
+    }
+
+    public function deleteItem($userId, $productId){
+        return Cart::where('user_id', $userId)
+            ->where('product_id', $productId)
+            ->update(['del_flg' => 1]);
+    }
+
+    public function clearCart($userId){
+        return Cart::where('user_id', $userId)
+            ->update(['del_flg' => 1]);
     }
 }
