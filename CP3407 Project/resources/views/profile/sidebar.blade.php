@@ -34,28 +34,21 @@
                 </svg>
                 <span class="ml-3">Order History</span>
             </a>
-            <a href="/userProfile" class="flex items-center p-2 text-white rounded-lg {{ request()->is('notifications*') ? 'bg-[#7D7575]' : 'hover:bg-[#7D7575]' }} mb-2">
-                <svg class="h-6 w-6 text-white transition duration-75 group-hover:text-white"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                </svg>
-                <span class="ml-3">Notifications</span>
-            </a>
         </div>
     </div>
     <div class="absolute bottom-8 w-full flex items-center justify-center">
-        <a href="#" class="flex items-center px-5 py-2 text-black rounded-lg bg-white font-medium">
-            <svg class="h-6 w-6 text-black transition duration-75 group-hover:text-white mr-5" width="24"
-                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
-                <path d="M7 12h14l-3 -3m0 6l3 -3" />
-            </svg>
-            Log Out
-        </a>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="flex items-center px-5 py-2 text-black rounded-lg bg-white font-medium">
+                <svg class="h-6 w-6 text-black transition duration-75 group-hover:text-white mr-5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                    <path d="M7 12h14l-3 -3m0 6l3 -3" />
+                </svg>
+                Log Out
+            </button>
+        </form>
     </div>
+
 
 </aside>

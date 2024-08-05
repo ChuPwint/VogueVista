@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -26,81 +28,55 @@ class UserProfileController extends Controller
         ]);
     }
 
-    public function updateProfile(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255',
-        'address' => 'nullable|string|max:255',
-        'phone' => 'nullable|string|max:20',
-        'postcode' => 'nullable|string|max:10',
-    ]);
-
-    $user = Auth::user();
-
-    $user->name = $request->input('name');
-    $user->email = $request->input('email');
-    $user->address = $request->input('address');
-    $user->phone = $request->input('phone');
-    $user->postcode = $request->input('postcode');
-
-    $user->save();
-
-    return redirect()->back()->with('status', 'Profile updated successfully!');
-}
-
-
-    public function showProfile()
-    {
-        $user = Auth::user();
-        return view('profile', compact('user'));
+    public function updateProfile(Request $request){
+        // dd($request);
+        $user = new User();
+        $user->updateUserInfo($request, Auth::id());
+        return redirect()->route('userProfile');
     }
 
     public function updateImage(Request $request)
 {
     $request->validate([
-        'profile_image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        'profile_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
     ]);
 
-    try {
-        $image = $request->file('profile_image');
-        $path = $image->store('profile_images', 'public');
+    $user = Auth::user();
 
-        // Update user's profile picture path
-        $user = Auth::user();
-        $user->profile_picture = $path;
+    if ($request->hasFile('profile_image')) {
+        // Delete old profile image if exists
+        if ($user->profile && Storage::exists($user->profile)) {
+            Storage::delete($user->profile);
+        }
+
+        // Store the new profile image
+        $path = $request->file('profile_image')->store('profile_images', 'public');
+
+        // Update the user's profile image path in the database
+        $user->profile = $path;
         $user->save();
 
-        return response()->json([
-            'success' => true,
-            'image_url' => Storage::url($path),
-        ]);
-    } catch (\Exception $e) {
-        return response()->json([
-            'success' => false,
-            'message' => 'An error occurred while updating the profile image. Please try again.',
-        ], 500);
+        return response()->json(['success' => true, 'image_url' => Storage::url($path)]);
     }
+
+    return response()->json(['success' => false, 'message' => 'No image uploaded']);
+}
+
+public function removeImage()
+{
+    $user = Auth::user();
+
+    // Delete the profile image if exists
+    if ($user->profile && Storage::exists($user->profile)) {
+        Storage::delete($user->profile);
+    }
+
+    // Update the user's profile image path in the database
+    $user->profile = null;
+    $user->save();
+
+    return response()->json(['success' => true]);
 }
 
 
-    public function removeProfileImage()
-    {
-        $user = Auth::user();
-
-        if (!$user) {
-            return response()->json(['success' => false, 'message' => 'User not authenticated'], 401);
-        }
-
-        // Delete the old profile image if it exists
-        if ($user->profile_picture && Storage::exists($user->profile_picture)) {
-            Storage::delete($user->profile_picture);
-        }
-
-        // Set the profile picture to null
-        $user->profile_picture = null;
-        $user->save();
-
-        return response()->json(['success' => true]);
-    }
 }

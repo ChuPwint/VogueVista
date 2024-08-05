@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\forgotPasswordController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ShopController;
@@ -51,10 +52,13 @@ Route::withoutMiddleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::resource('/userProfile', UserProfileController::class);
-    Route::post('/update-profile', [UserProfileController::class, 'updateProfile'])->name('updateProfile');
+    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+    Route::get('/userProfile', [UserProfileController::class, 'index'])->name('userProfile');
+    Route::post('/userProfile', [UserProfileController::class, 'updateProfile'])->name('updateProfile');
+    Route::post('/userProfile/update-image', [UserProfileController::class, 'updateImage'])->name('updateProfileImage');
+    Route::post('/userProfile/remove-image', [UserProfileController::class, 'removeImage'])->name('removeProfileImage');
     Route::resource('/favorites', FavoritesController::class);
-    Route::resource('/orderHistory', OrderHistoryController::class);
+    Route::get('/orderHistory', [OrderHistoryController::class, 'index'])->name('orderHistory');
     Route::resource('/products', ProductsController::class);
     Route::resource('/cart', CartController::class);
     Route::resource('/checkout', CheckoutController::class);
