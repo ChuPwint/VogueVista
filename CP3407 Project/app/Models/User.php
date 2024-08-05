@@ -104,6 +104,16 @@ class User extends Authenticatable
             ->update(['password' => Hash::make($password)]);
     }
 
+    public function updateUserInfo($request, $userId){
+        return User::where('id', $userId)
+            ->update([
+                'name' => $request->name,
+                'address' => $request->address,
+                'phone' => $request->phone,
+                'postcode' => $request->postcode,
+        ]);
+    }
+
     public function deleteProfilePicture()
     {
         if ($this->profile_picture && Storage::exists($this->profile_picture)) {
@@ -118,5 +128,10 @@ class User extends Authenticatable
         $this->deleteProfilePicture();
         $this->profile_picture = $path;
         $this->save();
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }
