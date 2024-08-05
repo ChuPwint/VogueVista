@@ -76,10 +76,18 @@
                                                             <ion-icon name="heart-outline" class="like"></ion-icon>
                                                         </div>
                                                     </div>
-                                                    <div class="flex justify-between items-center">
-                                                        <p class="font-medium">$${product.price}</p>
-                                                        <button class="buyNow text-sm bg-black text-white px-2 py-1 rounded-md hover:text-black hover:bg-white hover:border hover:border-black" data-product-id="${product.id}">Buy Now</button>
-                                                    </div>
+                                                    <form action="{{ route('cart.store') }}" method="POST" >
+                                                        @csrf
+                                                        <input type="hidden" name="productId" value="${product.id}">
+                                                        <input type="hidden" name="quantity" value=1>
+                                                        <div class="flex justify-between items-center">
+                                                            <p class="font-medium">$${product.price}</p>
+                                                            <button
+                                                                type="submit"
+                                                                class="buyNow text-sm bg-black text-white px-2 py-1 rounded-md hover:text-black hover:bg-white hover:border hover:border-black"
+                                                                >Add to Cart</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
