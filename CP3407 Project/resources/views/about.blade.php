@@ -12,7 +12,7 @@
 
 <body>
     
-        @include('includes.navbar')
+        @include('includes.navbar', ['status' => $status, 'cartItems' => $cartItems])
 
     <div class="px-28 py-8">
         <h1 class="text-3xl font-bold">OUR STORY</h1>

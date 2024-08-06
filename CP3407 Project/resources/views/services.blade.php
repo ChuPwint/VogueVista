@@ -12,7 +12,7 @@
 
 <body>
 
-    @include('includes.navbar')
+    @include('includes.navbar' , ['status' => $status, 'cartItems' => $cartItems])
 
     <div class="relative">
         <img src="images/service.webp" alt="" class="w-full h-[380px] object-cover brightness-50 ">

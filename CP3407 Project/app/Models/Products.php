@@ -52,6 +52,13 @@ class Products extends Model
                         ->paginate(12);;
     }
 
+    public function showCatPaginateBySubId($categoryId)
+    {
+        return Products::where('category_id', $categoryId)
+                        ->where('stock', '>', 0)
+                        ->paginate(12);;
+    }
+
     //show all products
     public function showAll()
     {

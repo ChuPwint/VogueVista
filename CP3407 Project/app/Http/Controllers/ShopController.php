@@ -73,16 +73,19 @@ class ShopController extends Controller
         $status = "logOut";
         $cartItems = 0;
         if (Auth::check()) {
+            // dd("in if");
             $status = "logIn";
             $cart = new Cart();
             $cartItems = $cart->getItemCount(Auth::id());
+            // dd($cartItems);
         }
 
-        $product = new Products();
 
+        $product = new Products();
         $subCatClass = new SubCategory();
+
         // Check if a main category ID is provided
-        if ($mainCategoryId) {
+        if ($mainCategoryId != null) {
             // Fetch subcategories for the given main category
             $subCatClass = new SubCategory();
             $subCategories = $subCatClass->getSubCategories($mainCategoryId);
@@ -91,10 +94,10 @@ class ShopController extends Controller
 
             // Fetch products related to these subcategories
             $products = $product->showCatPaginate($subCategoryArray);
-        } else if($subCatId){
-
+        } else if($subCatId != null){
+            // dd("here");
             //Fetch products
-            $products = $product->showCatPaginate($subCatId);
+            $products = $product->showCatPaginateBySubId($subCatId);
         } else {
             // Fetch all products
             $products = $product->showPaginate();

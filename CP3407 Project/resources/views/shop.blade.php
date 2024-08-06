@@ -226,11 +226,11 @@
                                 $lastProduct = (int) $index == $count - 1 ? true : false;
                             @endphp
                             <div @class([
-                                'mr-20' => $last2 && $lastProduct,
+                                '' => $last2 && $lastProduct,
                                 'products',
                             ])>
                                 <div
-                                    class="w-56 h-[320px] rounded-md shadow-md shadow-gray-300 hover:cursor-pointer hover:scale-[1.03] transition-transform mb-4">
+                                    class="w-56 h-[320px] rounded-md shadow-md shadow-gray-300 hover:scale-[1.03] transition-transform mb-4">
                                     <div class="w-full h-3/4">
                                         <img class="object-cover w-full h-full" src="{{ $product->p_photo }}"
                                             alt="{{ $product->pname }}">
