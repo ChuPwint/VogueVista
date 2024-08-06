@@ -46,6 +46,15 @@ Route::withoutMiddleware('auth')->group(function () {
     });
 
     Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+    Route::get('/shop/women', [ShopController::class, 'showWomenProducts'])->name('shop.women');
+    Route::get('/shop/women-top', [ShopController::class, 'showWomenTopProducts']);
+    Route::get('/shop/women-shorts', [ShopController::class, 'showWomenShortsProducts']);
+    Route::get('/shop/men-top', [ShopController::class, 'showMenTopProducts']);
+    Route::get('/shop/men-shorts', [ShopController::class, 'showMenShortsProducts']);
+    Route::get('/shop/jewelry', [ShopController::class, 'showJewelryProducts']);
+    Route::get('/shop/bags', [ShopController::class, 'showBagProducts']);
+    Route::get('/shop/men', [ShopController::class, 'showMenProducts'])->name('shop.men');
+    Route::get('/shop/accessories', [ShopController::class, 'showAccessoryProducts'])->name('shop.accessory');
     Route::get('/shop/sort', [ShopController::class, 'sortProducts'])->name('sortProduct');
     Route::resource('/about', AboutController::class);
     Route::resource('/services', ServicesController::class);

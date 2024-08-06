@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Products;
+use App\Models\SubCategory;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,59 @@ class ShopController extends Controller
      */
     public function index()
     {
+        return $this->showProducts();
+    }
+
+    /**
+     * Display women products
+    */
+    public function showWomenProducts(){
+        return $this->showProducts(1);
+    }
+
+    /**
+     * Display men products
+    */
+    public function showMenProducts(){
+        return $this->showProducts(2);
+    }
+
+    /**
+     * Display accessory products
+    */
+    public function showAccessoryProducts(){
+        return $this->showProducts(3);
+    }
+
+    public function showWomenTopProducts(){
+        return $this->showProducts(null, 1);
+    }
+
+    public function showWomenShortsProducts(){
+        return $this->showProducts(null, 2);
+    }
+
+    public function showMenTopProducts(){
+        return $this->showProducts(null, 3);
+    }
+
+    public function showMenShortsProducts(){
+        return $this->showProducts(null, 4);
+    }
+
+    public function showJewelryProducts(){
+        return $this->showProducts(null, 5);
+    }
+
+    public function showBagProducts(){
+        return $this->showProducts(null, 6);
+    }
+
+    /**
+     * Display products related to a specific main category or all products if no category is provided.
+     */
+    public function showProducts($mainCategoryId = null, $subCatId = null)
+    {
         $status = "logOut";
         $cartItems = 0;
         if (Auth::check()) {
@@ -25,26 +79,46 @@ class ShopController extends Controller
         }
 
         $product = new Products();
-        $allProduct = $product->showPaginate();
-        //product count
-        $count = count($product->showAll());
+
+        $subCatClass = new SubCategory();
+        // Check if a main category ID is provided
+        if ($mainCategoryId) {
+            // Fetch subcategories for the given main category
+            $subCatClass = new SubCategory();
+            $subCategories = $subCatClass->getSubCategories($mainCategoryId);
+            $subCategoryArray = $subCategories->pluck('id');
+            // dd($subCategoryArray);
+
+            // Fetch products related to these subcategories
+            $products = $product->showCatPaginate($subCategoryArray);
+        } else if($subCatId){
+
+            //Fetch products
+            $products = $product->showCatPaginate($subCatId);
+        } else {
+            // Fetch all products
+            $products = $product->showPaginate();
+        }
+
+        // Product count
+        $count = $products->total();
 
         $wishlist = new Wishlist();
         $allWishlists = $wishlist->getAllWishlistedItems(Auth::id());
 
         // Extract only product IDs
-        if($allWishlists->isNotEmpty())
+        if ($allWishlists->isNotEmpty()) {
             $wishlistProductIds = $allWishlists->pluck('product_id')->toArray();
-        else
+        } else {
             $wishlistProductIds = [];
+        }
 
-        // dd($allWishlists);
-        return view("/shop", [
+        return view("shop", [
             'status' => $status,
             'cartItems' => $cartItems,
-            'products' => $allProduct,
+            'products' => $products,
             'count' => $count,
-            "wishlists" => $wishlistProductIds,
+            'wishlists' => $wishlistProductIds,
         ]);
     }
 

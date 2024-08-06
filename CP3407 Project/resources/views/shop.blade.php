@@ -118,95 +118,65 @@
 </script>
 
 <body>
-    @include('includes.navbar', ['status' => $status , "cartItems" => $cartItems])
+    @include('includes.navbar', ['status' => $status, 'cartItems' => $cartItems])
     <div class="relative h-full">
         {{-- Start of side bar --}}
         <aside class="bg-black border-t border-white absolute top-0 left-0 z-40 w-64 h-full transition-transform ">
             <div class="h-full px-3 py-4 overflow-y-auto bg-black text-white">
-                <div class="space-y-2 font-medium">
+                <div class="space-y-2 font-medium h-full">
                     <div>
                         {{-- Start of categories  --}}
                         {{-- Category button --}}
-                        <button type="button"
+                        <button
                             class="categoryToggle border-b border-white  flex items-center w-full p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg group hover:bg-gray-100 hover:text-black">
                             <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Categories</span>
                         </button>
-
-                        {{-- Start of categories drop down list --}}
                         <div class="categoryList space-y-2">
                             {{-- Start of women categories list --}}
-                            <button type="button"
-                                class="categoryShow womenCategory border-b border-white  justify-between items-center w-[89%] p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg hover:bg-gray-100 hover:text-black">
-                                <span class="text-left ">Women</span>
-                            </button>
+                            <a href="/shop/women"
+                                class="ml-7 block border-b border-white  justify-between items-center w-[89%] p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg hover:bg-gray-100 hover:text-black">
+                                Women
+                            </a>
                             <div class="womenCategoryShow">
-                                <div class="flex justify-end">
-                                    <a href="#"
-                                        class="text-left border-b border-white  flex items-center w-[75%] p-2 text-white transition duration-75 rounded-sm hover:rounded-lg pl-4 hover:bg-gray-100 hover:text-black">Tops</a>
-                                </div>
-                                <div class="flex justify-end">
-                                    <a href="#"
-                                        class="text-left border-b border-white  flex items-center w-[75%] p-2 text-white transition duration-75 rounded-sm hover:rounded-lg pl-4  hover:bg-gray-100 hover:text-black">Bottoms</a>
-                                </div>
+                                <a href="/shop/women-top"
+                                    class="ml-14 text-left border-b border-white  flex items-center w-[75%] p-2 text-white transition duration-75 rounded-sm hover:rounded-lg pl-4 hover:bg-gray-100 hover:text-black">Tops</a>
+
+                                <a href="/shop/women-shorts"
+                                    class="ml-14 text-left border-b border-white  flex items-center w-[75%] p-2 text-white transition duration-75 rounded-sm hover:rounded-lg pl-4  hover:bg-gray-100 hover:text-black">Bottoms</a>
                             </div>
                             {{-- End of women categories list --}}
                             {{-- Start of men categories list --}}
-                            <button type="button"
-                                class="categoryShow menCategory border-b border-white  items-center w-[89%] p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg hover:bg-gray-100 hover:text-black">
-                                <span class="text-left">Men</span>
-                            </button>
+                            <a href="/shop/men"
+                                class="ml-7 block border-b border-white  justify-between items-center w-[89%] p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg hover:bg-gray-100 hover:text-black">
+                                Men
+                            </a>
                             <div class="menCategoryShow">
-                                <div class="flex justify-end">
-                                    <a href="#"
-                                        class="text-left border-b border-white  flex items-center w-[75%] p-2 text-white transition duration-75 rounded-sm hover:rounded-lg pl-4 hover:bg-gray-100 hover:text-black">Tops</a>
-                                </div>
-                                <div class="flex justify-end">
-                                    <a href="#"
-                                        class="text-left border-b border-white  flex items-center w-[75%] p-2 text-white transition duration-75 rounded-sm hover:rounded-lg pl-4 hover:bg-gray-100 hover:text-black">Bottoms</a>
-                                </div>
+                                <a href="/shop/men-top"
+                                    class="ml-14 text-left border-b border-white  flex items-center w-[75%] p-2 text-white transition duration-75 rounded-sm hover:rounded-lg pl-4 hover:bg-gray-100 hover:text-black">Tops</a>
+
+                                <a href="/shop/men-shorts"
+                                    class="ml-14 text-left border-b border-white  flex items-center w-[75%] p-2 text-white transition duration-75 rounded-sm hover:rounded-lg pl-4 hover:bg-gray-100 hover:text-black">Bottoms</a>
                             </div>
                             {{-- End of men categories list --}}
                             {{-- Start of accessories categories list --}}
-                            <button type="button"
-                                class="categoryShow accessoryCategory border-b items-center w-[89%] p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg hover:bg-gray-100 hover:text-black">
-                                <span class="text-left">Accessories</span>
-                            </button>
+                            <a href="/shop/accessories"
+                                class="ml-7 block border-b border-white  justify-between items-center w-[89%] p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg hover:bg-gray-100 hover:text-black">
+                                Accessories
+                            </a>
                             <div class="accessoryCategoryShow">
-                                <div class="flex justify-end">
-                                    <a href="#"
-                                        class="text-left border-b border-white  flex items-center w-[75%] p-2 text-white transition duration-75 rounded-sm hover:rounded-lg pl-4 hover:bg-gray-100 hover:text-black">Jeweleries</a>
-                                </div>
-                                <div class="flex justify-end">
-                                    <a href="#"
-                                        class="text-left flex items-center w-[75%] p-2 text-white transition duration-75 rounded-sm hover:rounded-lg pl-4 hover:bg-gray-100 hover:text-black">Bags</a>
-                                </div>
-                            </div>
-                            {{-- End of accessories categories list --}}
-                            </ul>
-                            {{-- End of categories drop down list --}}
-                        </div>
-                        {{-- End of categories  --}}
-                        <hr class="w-full mb-3">
-                        {{-- Start of prices --}}
-                        <div class="">
-                            <div class="px-2 py-2 text-black">
-                                <div class="mb-3 text-lg text-white">Prices</div>
-                                <div class="flex justify-around items-center mb-3">
-                                    <input type="number"
-                                        class="placeholder:text-center text-center w-[65px] rounded-lg px-2 py-1 outline-none"
-                                        name="min" id="minPrice" placeholder="min">
-                                    <span class="text-white font-medium text-lg">-</span>
-                                    <input type="number"
-                                        class=" placeholder:text-center text-center w-[65px] rounded-lg px-2 py-1"
-                                        name="max" id="maxPrice" placeholder="max">
-                                </div>
-                            </div>
-                        </div>
-                        {{-- End of prices --}}
+                                <a href="/shop/jewelry"
+                                    class="ml-14 text-left border-b border-white  flex items-center w-[75%] p-2 text-white transition duration-75 rounded-sm hover:rounded-lg pl-4 hover:bg-gray-100 hover:text-black">Jeweleries</a>
 
-                        <hr class="w-full mb-3">
+                                <a href="/shop/bags"
+                                    class="ml-14 text-left flex items-center w-[75%] p-2 text-white transition duration-75 rounded-sm hover:rounded-lg pl-4 hover:bg-gray-100 hover:text-black">Bags</a>
+                            </div>
+                        </div>
+                        {{-- End of accessories categories list --}}
                     </div>
+                    {{-- End of categories  --}}
+                    <hr class="w-full mb-3">
                 </div>
+            </div>
         </aside>
         {{-- End of side bar --}}
         <div class="px-4 py-2 ml-64">
@@ -276,21 +246,21 @@
                                                         $isInWishlist = in_array($product->id, $wishlists);
                                                     @endphp
                                                     <button type="submit">
-                                                        <ion-icon name="{{ $isInWishlist ? 'heart' : 'heart-outline' }}" class="{{ $isInWishlist ? 'text-red-500' : '' }} like"></ion-icon>
+                                                        <ion-icon name="{{ $isInWishlist ? 'heart' : 'heart-outline' }}"
+                                                            class="{{ $isInWishlist ? 'text-red-500' : '' }} like"></ion-icon>
                                                     </button>
                                                 </form>
                                             </div>
                                         </div>
-                                        <form action="{{ route('cart.store') }}" method="POST" >
+                                        <form action="{{ route('cart.store') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="productId" value=" {{ $product->id }}">
                                             <input type="hidden" name="quantity" value=1>
                                             <div class="flex justify-between items-center">
                                                 <p class="font-medium">${{ $product->price }}</p>
-                                                <button
-                                                    type="submit"
-                                                    class="buyNow text-sm bg-black text-white px-2 py-1 rounded-md hover:text-black hover:bg-white hover:border hover:border-black"
-                                                    >Add to Cart</button>
+                                                <button type="submit"
+                                                    class="buyNow text-sm bg-black text-white px-2 py-1 rounded-md hover:text-black hover:bg-white hover:border hover:border-black">Add
+                                                    to Cart</button>
                                             </div>
                                         </form>
                                     </div>
