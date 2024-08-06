@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Products;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -23,20 +24,27 @@ class ShopController extends Controller
             $cartItems = $cart->getItemCount(Auth::id());
         }
 
-        // dd($cartItems);
         $product = new Products();
         $allProduct = $product->showPaginate();
         //product count
         $count = count($product->showAll());
 
-        // dd($count);
-        // dd($allProduct[0]->category_id);
+        $wishlist = new Wishlist();
+        $allWishlists = $wishlist->getAllWishlistedItems(Auth::id());
 
+        // Extract only product IDs
+        if($allWishlists->isNotEmpty())
+            $wishlistProductIds = $allWishlists->pluck('product_id')->toArray();
+        else
+            $wishlistProductIds = [];
+
+        // dd($allWishlists);
         return view("/shop", [
             'status' => $status,
             'cartItems' => $cartItems,
             'products' => $allProduct,
             'count' => $count,
+            "wishlists" => $wishlistProductIds,
         ]);
     }
 

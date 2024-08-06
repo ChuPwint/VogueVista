@@ -28,16 +28,21 @@ class Products extends Model
         return $this->hasMany(OrderDetail::class, 'product_id');
     }
 
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
     //show 12 products in a page
     public function showPaginate()
     {
-        return Products::paginate(12);
+        return Products::where('stock', '>', 0)->paginate(12);
     }
 
     //show all products
     public function showAll()
     {
-        return Products::all();
+        return Products::where('stock', '>', 0)->get();
     }
 
     //sort product by lowest price

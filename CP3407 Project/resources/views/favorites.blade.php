@@ -26,7 +26,6 @@
                         <thead class="border-b border-b-light-gray border-opacity-25 text-gray-700">
                             <tr>
                                 <th class="px-6 py-3">
-
                                 </th>
                                 <th class="px-6 py-3 text-center">
                                     Product Name
@@ -37,98 +36,55 @@
                                 <th class="px-6 py-3 text-center">
                                     Stock Status
                                 </th>
-                                <th class="px-6 py-3 text-center">
+                                <th colspan="2" class="px-6 py-3 text-center">
                                     Actions
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             {{-- Start of cart items --}}
-                            <tr class="bg-white border-b border-b-light-gray border-opacity-25 hover:bg-gray-50">
-                                <th
-                                    class="px-6 py-4 justify-center font-medium flex items-center text-gray-900 whitespace-nowrap">
-                                    <div class="w-20 h-20 flex justify-center items-center shadow-md">
-                                        <img class="h-full" src="/images/new arrival dress.webp" alt="">
-                                    </div>
-
-                                </th>
-                                <td class="py-4 text-lg text-center">
-                                    <p class="text-lg font-medium">Casual Cotton Dress</p>
-                                </td>
-                                <td class="px-6 py-4 text-lg text-center">
-                                    $70
-                                </td>
-                                <td class="px-6 py-4 text-lg text-center">
-                                    {{-- @foreach ($product as $products)
-                                <tr>
-                                    <td class="px-6 py-4 text-lg text-center">{{ $products->name }}</td>
+                            @foreach ($wishlists as $wishlist)
+                                <tr class="bg-white border-b border-b-light-gray border-opacity-25 hover:bg-gray-50">
+                                    <th
+                                        class="px-6 py-4 justify-center font-medium flex items-center text-gray-900 whitespace-nowrap">
+                                        <div class="w-20 h-20 flex justify-center items-center shadow-md">
+                                            <img class="h-full" src="{{ $wishlist->product->p_photo }}" alt="">
+                                        </div>
+                                    </th>
+                                    <td class="py-4 text-lg text-center">
+                                        <p class="text-lg font-medium">{{ $wishlist->product->pname }}</p>
+                                    </td>
                                     <td class="px-6 py-4 text-lg text-center">
-                                        {{ $products->stock > 0 ? 'In Stock' : 'Out of Stock' }}
+                                        ${{ number_format($wishlist->product->price) }}
+                                    </td>
+                                    <td class="px-6 py-4 text-lg text-center">
+                                        {{ $wishlist->product->stock > 0 ? 'In Stock' : 'Out of Stock' }}
+                                    </td>
+                                    <td class="px-3 py-4 text-center">
+                                        <form action="{{ route('cart.store') }}" method="POST" class="{{ $wishlist->product->stock > 0 ? 'block' : 'hidden' }}">
+                                            @csrf
+                                            <input type="hidden" name="productId" value=" {{ $wishlist->product_id }}">
+                                            <input type="hidden" name="quantity" value=1>
+                                            <div class="flex items-center justify-center">
+                                                <button type="submit" class=" px-4 py-2 bg-black text-white text-m">Add
+                                                    to cart</button>
+                                            </div>
+                                        </form>
+                                        
+                                    </td>
+                                    <td class="px-3 py-4 text-center">
+                                        <form action="{{ route('favorites.destroy', $wishlist->product_id) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit">
+                                                <ion-icon name="trash-outline"
+                                                    class="text-2xl text-red-500 cursor-pointer"></ion-icon>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
-                            @endforeach --}}
-                                </td>
-                                <td class="px-6 py-4 text-center">
-                                    <div class="flex items-center justify-center">
-                                        <button class="px-4 py-2 bg-black text-white text-m">Add to cart</button>
-                                        <ion-icon name="trash-outline"
-                                            class="text-2xl hover:text-red-500 cursor-pointer ml-4"></ion-icon>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr
-                                class="bg-white border-b border-b-light-gray border-opacity-25 shadow-sm hover:bg-gray-50">
-                                <th
-                                    class="px-6 py-4 justify-center font-medium flex items-center text-gray-900 whitespace-nowrap">
-                                    <div class="w-20 h-20 flex justify-center items-center shadow-md">
-                                        <img class="h-full" src="/images/new arrival skirt.jpg" alt="">
-                                    </div>
-
-                                </th>
-                                <td class="py-4 text-lg text-center">
-                                    Classic Velvet Dress
-                                </td>
-                                <td class="px-6 py-4 text-center">
-                                    $90
-                                </td>
-                                <td class="px-6 py-4 text-lg text-center">
-
-                                </td>
-                                <td class="px-6 py-4 text-center">
-                                    <div class="flex items-center justify-center">
-                                        <button class="px-4 py-2 bg-black text-white text-m">Add to cart</button>
-                                        <ion-icon name="trash-outline"
-                                            class="text-2xl hover:text-red-500 cursor-pointer ml-4"></ion-icon>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr
-                                class="bg-white border-b border-b-light-gray border-opacity-25 shadow-sm hover:bg-gray-50">
-                                <th
-                                    class="px-6 py-4 justify-center font-medium flex items-center text-gray-900 whitespace-nowrap">
-                                    <div class="w-20 h-20 flex justify-center items-center shadow-md">
-                                        <img class="h-full" src="/images/new arrival top.webp" alt="">
-                                    </div>
-
-                                </th>
-
-                                <td class="py-4 text-lg text-center">
-                                    Elegant Blouse
-                                </td>
-                                <td class="px-6 py-4 text-center">
-                                    $55
-                                </td>
-                                <td class="px-6 py-4 text-lg text-center">
-
-                                </td>
-                                <td class="px-6 py-4 text-center">
-                                    <div class="flex items-center justify-center">
-                                        <button class="px-4 py-2 bg-black text-white text-m">Add to cart</button>
-                                        <ion-icon name="trash-outline"
-                                            class="text-2xl hover:text-red-500 cursor-pointer ml-4"></ion-icon>
-                                    </div>
-                                </td>
-                            </tr>
+                            @endforeach
                             {{-- End of cart items --}}
                         </tbody>
                     </table>

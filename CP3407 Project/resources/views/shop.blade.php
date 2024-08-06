@@ -130,26 +130,16 @@
                         <button type="button"
                             class="categoryToggle border-b border-white  flex items-center w-full p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg group hover:bg-gray-100 hover:text-black">
                             <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Categories</span>
-                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 10 6">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 1 4 4 4-4" />
-                            </svg>
                         </button>
 
                         {{-- Start of categories drop down list --}}
                         <div class="categoryList space-y-2">
                             {{-- Start of women categories list --}}
                             <button type="button"
-                                class="categoryShow womenCategory ml-[25px] hidden border-b border-white  justify-between items-center w-[89%] p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg hover:bg-gray-100 hover:text-black">
-                                <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Women</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 1 4 4 4-4" />
-                                </svg>
+                                class="categoryShow womenCategory border-b border-white  justify-between items-center w-[89%] p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg hover:bg-gray-100 hover:text-black">
+                                <span class="text-left ">Women</span>
                             </button>
-                            <div class="womenCategoryShow hidden">
+                            <div class="womenCategoryShow">
                                 <div class="flex justify-end">
                                     <a href="#"
                                         class="text-left border-b border-white  flex items-center w-[75%] p-2 text-white transition duration-75 rounded-sm hover:rounded-lg pl-4 hover:bg-gray-100 hover:text-black">Tops</a>
@@ -162,15 +152,10 @@
                             {{-- End of women categories list --}}
                             {{-- Start of men categories list --}}
                             <button type="button"
-                                class="categoryShow menCategory hidden ml-[25px] border-b border-white  items-center w-[89%] p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg hover:bg-gray-100 hover:text-black">
-                                <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Men</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 1 4 4 4-4" />
-                                </svg>
+                                class="categoryShow menCategory border-b border-white  items-center w-[89%] p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg hover:bg-gray-100 hover:text-black">
+                                <span class="text-left">Men</span>
                             </button>
-                            <div class="menCategoryShow hidden">
+                            <div class="menCategoryShow">
                                 <div class="flex justify-end">
                                     <a href="#"
                                         class="text-left border-b border-white  flex items-center w-[75%] p-2 text-white transition duration-75 rounded-sm hover:rounded-lg pl-4 hover:bg-gray-100 hover:text-black">Tops</a>
@@ -183,15 +168,10 @@
                             {{-- End of men categories list --}}
                             {{-- Start of accessories categories list --}}
                             <button type="button"
-                                class="categoryShow accessoryCategory hidden ml-[25px]  items-center w-[89%] p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg hover:bg-gray-100 hover:text-black">
-                                <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Accessories</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 1 4 4 4-4" />
-                                </svg>
+                                class="categoryShow accessoryCategory border-b items-center w-[89%] p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg hover:bg-gray-100 hover:text-black">
+                                <span class="text-left">Accessories</span>
                             </button>
-                            <div class="accessoryCategoryShow hidden">
+                            <div class="accessoryCategoryShow">
                                 <div class="flex justify-end">
                                     <a href="#"
                                         class="text-left border-b border-white  flex items-center w-[75%] p-2 text-white transition duration-75 rounded-sm hover:rounded-lg pl-4 hover:bg-gray-100 hover:text-black">Jeweleries</a>
@@ -224,24 +204,6 @@
                         </div>
                         {{-- End of prices --}}
 
-                        <hr class="w-full mb-3">
-                        {{-- Start of sizes --}}
-                        <div>
-                            <div class="px-2 py-2 ">
-                                <div class="mb-3 text-lg">Sizes</div>
-                                <div class="text-black flex justify-around items-center mb-3">
-                                    <button
-                                        class="text-center px-5 py-1 rounded-xl bg-white w-12 flex justify-center items-center">S</button>
-                                    <button
-                                        class="text-center px-5 py-1 rounded-xl bg-white w-12 flex justify-center items-center">M</button>
-                                    <button
-                                        class="text-center px-5 py-1 rounded-xl bg-white w-12 flex justify-center items-center">L</button>
-                                    <button
-                                        class="text-center px-5 py-1 rounded-xl bg-white w-12 flex justify-center items-center">XL</button>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- End of sizes --}}
                         <hr class="w-full mb-3">
                     </div>
                 </div>
@@ -307,7 +269,16 @@
                                         <div class="flex justify-between items-center mb-2">
                                             <p class="text-lg font-medium">{{ $product->pname }}</p>
                                             <div class="flex justify-end text-xl">
-                                                <ion-icon name="heart-outline" class="like"></ion-icon>
+                                                <form action="{{ route('favorites.store') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="productId" value="{{ $product->id }}">
+                                                    @php
+                                                        $isInWishlist = in_array($product->id, $wishlists);
+                                                    @endphp
+                                                    <button type="submit">
+                                                        <ion-icon name="{{ $isInWishlist ? 'heart' : 'heart-outline' }}" class="{{ $isInWishlist ? 'text-red-500' : '' }} like"></ion-icon>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
                                         <form action="{{ route('cart.store') }}" method="POST" >

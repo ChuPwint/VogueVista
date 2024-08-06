@@ -28,8 +28,12 @@ class OrderHistoryController extends Controller
             // dd(Auth::id());
             // dd($allOrder);
             // dd($allOrder[0]->id);
-            $orderDetail = new OrderDetail();
-            $orderHistory = $orderDetail->getAllOrderDetails($allOrder[0]->id);
+            if($allOrder->isNotEmpty()){
+                $orderDetail = new OrderDetail();
+                $orderHistory = $orderDetail->getAllOrderDetails($allOrder[0]->id);
+            }else{
+                $orderHistory = [];
+            }
             // dd($orderHistory[0]);
             // dd($orderHistory[0]->product->pname);
         }

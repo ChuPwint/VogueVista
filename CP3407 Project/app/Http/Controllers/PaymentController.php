@@ -32,7 +32,7 @@ class PaymentController extends Controller
             $status = "logOut";
             $cartItems = [];
         }
-        
+
         return view("payment", [
             "allItems" => $cartItems,
             'status' => $status,
@@ -46,6 +46,19 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->action == "cash") {
+            $paymentMethod = 1;
+        } else if ($request->action == "card") {
+            $request->validate([
+                'cardNum' => 'required|digits:16',
+                'cardName' => 'required|string|max:255',
+                'expireDate' => 'required|date_format:Y-m',
+                'cvv' => 'required|digits:3',
+                'billAddress' => 'required|string|max:255',
+                'postalCode' => 'required|digits_between:4,6',
+            ]);
+            $paymentMethod = 2;
+        }
         $shippingDetails = session("shipping_details");
         // dd($request->action, $request->inCart, $shippingDetails);
         $request->session()->put('orderItems', $request->inCart);
@@ -58,18 +71,14 @@ class PaymentController extends Controller
         // dd($deliName);
 
         $orderClass = new Order();
-        if($request->action == "cash"){
-            $paymentMethod = 1;
-        }else if($request->action == "card"){
-            $paymentMethod = 2;
-        }
+
         $request->session()->put('paymentMethod', $request->action);
 
         $order = $orderClass->createOrder(Auth::id(), $paymentMethod, $request->total, $deliName, $address, $region, $postalCode, $phone);
-        
+
         $inCart = json_decode($request->inCart, true); // Decode JSON string to an array
         // dd($inCart);
-        $orderDetails = array_map(function($item) use ($order) {
+        $orderDetails = array_map(function ($item) use ($order) {
             return [
                 'order_id' => $order->id,
                 'product_id' => $item['product_id'],
@@ -82,6 +91,5 @@ class PaymentController extends Controller
         $cart = new Cart();
         $cart->clearCart(Auth::id());
         return redirect()->route("thankyou");
-        
     }
 }

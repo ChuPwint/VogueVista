@@ -76,23 +76,35 @@
                                         <input type="number" id="cardNum" name="cardNum"
                                             placeholder="1234 5678 9012 3456"
                                             class="border border-black px-3 py-5 rounded-md w-full h-8">
+                                        @error('cardNum')
+                                            <small class="text-red-500">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                     <div class="mb-5 w-full">
                                         <label for="cardName">Card Holder Name</label>
                                         <input type="text" id="cardName" name="cardName" placeholder="John Smith"
                                             class="border border-black px-3 py-5 rounded-md w-full h-8">
+                                        @error('cardName')
+                                            <small class="text-red-500">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                     <div class="mb-5 w-full flex justify-between items-center">
                                         <div class="">
                                             <label for="expireDate">Expire Date</label>
-                                            <input type="date" id="expireDate" name="expireDate" placeholder="12/12"
+                                            <input type="month" id="expireDate" name="expireDate" placeholder="12/12"
                                                 class="border border-black px-3 py-5 rounded-md w-full h-8">
+                                            @error('expireDate')
+                                                <small class="text-red-500">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                         <div class="">
                                             <label for="cvv">CVV</label>
                                             <input type="number" maxlength="3" id="cvv" name="cvv"
                                                 placeholder="123"
                                                 class="border border-black px-3 py-5 rounded-md w-full h-8">
+                                            @error('cvv')
+                                                <small class="text-red-500">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-5 w-full">
@@ -100,11 +112,17 @@
                                         <input type="text" id="billAddress" name="billAddress"
                                             placeholder="ABC Building"
                                             class="border border-black px-3 py-5 rounded-md w-full h-8">
+                                        @error('billAddress')
+                                            <small class="text-red-500">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                     <div class="mb-5 w-full">
                                         <label for="postalCode">Postal Code</label>
                                         <input type="number" id="postalCode" name="postalCode" placeholder="123456"
                                             class="border border-black px-3 py-5 rounded-md w-full h-8">
+                                        @error('postalCode')
+                                            <small class="text-red-500">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                     <div class="mt-8">
                                         <button type="submit" name="action" value="card"
@@ -132,20 +150,23 @@
                                                         <p class="text-lg"></p>{{ $item->products->pname }}
                                                     </div>
                                                 </div>
-                                                <div class="itemPrice flex items-center justify-center">${{ number_format($item->products->price) }}</div>
+                                                <div class="itemPrice flex items-center justify-center">
+                                                    ${{ number_format($item->products->price) }}</div>
                                                 <div class="flex items-center space-x-0">
-                                                    <input type="number" name="qty" value="{{ $item->quantity }}"
+                                                    <input type="number" name="qty"
+                                                        value="{{ $item->quantity }}"
                                                         class="quantityInput outline-none cursor-default text-center text-black w-10 border rounded-md border-black"
                                                         readonly>
                                                 </div>
                                                 @php
-                                                    $eachTotal = $item->products->price * $item->quantity
+                                                    $eachTotal = $item->products->price * $item->quantity;
                                                 @endphp
-                                                <div class="totalPrice flex items-center justify-center">${{ number_format($eachTotal) }}</div>
+                                                <div class="totalPrice flex items-center justify-center">
+                                                    ${{ number_format($eachTotal) }}</div>
                                             </div>
                                             {{-- End of items --}}
                                         @endforeach
-                                        
+
                                     </div>
                                     <hr class="w-full border border-light-gray">
                                     <div class="flex justify-between items-center mt-2 mb-2">
@@ -168,9 +189,7 @@
                                 <div class="mt-8">
                                     <input type="hidden" name="inCart" value="{{ $allItems }}">
                                     <input type="hidden" name="total" value="{{ $totalPrice }}">
-                                    <button
-                                        type="submit"
-                                        name="action" value="cash"
+                                    <button type="submit" name="action" value="cash"
                                         class="px-5 py-2 w-full bg-black rounded-sm text-white text-lg font-semibold">Confirm</button>
                                 </div>
                             </div>
@@ -194,16 +213,19 @@
                                                         <p class="text-lg"></p>{{ $item->products->pname }}
                                                     </div>
                                                 </div>
-                                                <div class="itemPrice flex items-center justify-center">${{ number_format($item->products->price) }}</div>
+                                                <div class="itemPrice flex items-center justify-center">
+                                                    ${{ number_format($item->products->price) }}</div>
                                                 <div class="flex items-center space-x-0">
-                                                    <input type="number" name="qty" value="{{ $item->quantity }}"
+                                                    <input type="number" name="qty"
+                                                        value="{{ $item->quantity }}"
                                                         class="quantityInput outline-none cursor-default text-center text-black w-10 border rounded-md border-black"
                                                         readonly>
                                                 </div>
                                                 @php
-                                                    $eachTotal = $item->products->price * $item->quantity
+                                                    $eachTotal = $item->products->price * $item->quantity;
                                                 @endphp
-                                                <div class="totalPrice flex items-center justify-center">${{ number_format($eachTotal) }}</div>
+                                                <div class="totalPrice flex items-center justify-center">
+                                                    ${{ number_format($eachTotal) }}</div>
                                             </div>
                                             {{-- End of items --}}
                                         @endforeach
