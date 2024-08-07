@@ -4,7 +4,7 @@
             <img src="/images/Logo.png" class="h-12 w-12 object-cover" alt="Flowbite Logo">
             <div class="flex md:order-2 space-x-3 rtl:space-x-reverse">
                 <div class="flex items-center space-x-4 justify-between w-[200px]">
-                    <a href="/favorites" class="relative text-white hover:text-gray-400">
+                    <a href="/favorites" class="text-white hover:text-gray-400">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round"

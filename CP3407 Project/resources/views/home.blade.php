@@ -15,27 +15,27 @@
 </head>
 <script>
     $(document).ready(function() {
-                $(".like").click(function() {
+        $(".like").click(function() {
 
-                    // Get the index of the clicked icon among all elements with class 'like'
-                    var index = $(".like").index(this);
-                    console.log(index);
-                    if ($(".like").eq(index).attr('name') == 'heart-outline') {
-                        // Fill color and change icon
-                        $(".like").eq(index).attr('name', 'heart');
-                        $(".like").eq(index).addClass("text-red-500");
-                    } else {
-                        // Fill color and change icon
-                        $(".like").eq(index).attr('name', 'heart-outline');
-                        $(".like").eq(index).removeClass("text-red-500");
-                    }
-                });
+            // Get the index of the clicked icon among all elements with class 'like'
+            var index = $(".like").index(this);
+            console.log(index);
+            if ($(".like").eq(index).attr('name') == 'heart-outline') {
+                // Fill color and change icon
+                $(".like").eq(index).attr('name', 'heart');
+                $(".like").eq(index).addClass("text-red-500");
+            } else {
+                // Fill color and change icon
+                $(".like").eq(index).attr('name', 'heart-outline');
+                $(".like").eq(index).removeClass("text-red-500");
+            }
+        });
     });
 </script>
 
-<body>
+<body class=" overflow-x-hidden">
 
-    @include('includes.navbar', ['status' => $status, "cartItems" => $cartItems])
+    @include('includes.navbar', ['status' => $status, 'cartItems' => $cartItems])
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
         <div class="relative overflow-hidden h-[600px]">
             <div class="duration-700 ease-in-out h-full" data-carousel-item="active">
@@ -139,70 +139,48 @@
         <br>
         <h1 class="text-center text-2xl font-medium mt-4 text-white cursor-pointer">New Arrivals</h1><br>
         <div class="flex flex-wrap justify-center px-28">
-            <div class="w-1/3 p-2">
-                <div class="p-4">
-                    <div class="w-full">
-                        <img src="images/new arrival dress.webp" alt=""
-                            class="w-full h-[26rem] object-cover">
-                        <div class="px-3 py-1 h-1/4 w-full mt-2">
-                            <div class="flex justify-between items-center mb-2">
-                                <p class="text-white">Classic Velvet Dress</p>
-                                <div class="flex justify-end text-xl text-white">
-                                    <ion-icon name="heart-outline" class=" like"></ion-icon>
+            @foreach ($newArrivals as $new)
+                <div class="w-1/3 p-2">
+                    <div class="p-4">
+                        <div class="w-full">
+                            <img src="{{ $new->p_photo }}" alt="" class="w-full h-[26rem] object-cover">
+                            <div class="px-3 py-1 h-1/4 w-full mt-2">
+                                <div class="flex justify-between items-center mb-2">
+                                    <p class="text-white">{{ $new->pname }}</p>
+                                    <div class="flex justify-end text-xl text-white">
+                                        <form action="{{ route('favorites.store') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="productId" value="{{ $new->id }}">
+                                            @php
+                                                $isInWishlist = in_array($new->id, $wishlists);
+                                            @endphp
+                                            <button type="submit">
+                                                <ion-icon name="{{ $isInWishlist ? 'heart' : 'heart-outline' }}"
+                                                    class="{{ $isInWishlist ? 'text-red-500' : '' }} like"></ion-icon>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <p class="text-white">$50</p>
-                                <button
-                                    class="text-sm bg-white text-black px-2 py-1 rounded-md border hover:text-white hover:bg-transparent hover:border-white  transition duration-500">Buy
-                                    Now</button>
+                                <div class="flex justify-between items-center">
+                                    <p class="text-white">${{ number_format($new->price) }}</p>
+                                    <form action="{{ route('cart.store') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="productId" value=" {{ $new->id }}">
+                                        <input type="hidden" name="quantity" value=1>
+                                        <div class="flex justify-between items-center">
+                                            <p class="font-medium">${{ $new->price }}</p>
+                                            <button type="submit"
+                                                class="buyNow text-sm bg-white text-black px-2 py-1 rounded-md hover:text-white hover:bg-black hover:border hover:border-white">Add
+                                                to Cart</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="w-1/3 p-2">
-                <div class="p-4">
-                    <div class="w-full">
-                        <img src="images/new arrival top.webp" alt="" class="w-full h-[26rem] object-cover">
-                        <div class="px-3 py-1 h-1/4 w-full mt-2">
-                            <div class="flex justify-between items-center mb-2">
-                                <p class="text-white">Elegant Blouse</p>
-                                <div class="flex justify-end text-xl text-white">
-                                    <ion-icon name="heart-outline" class=" like"></ion-icon>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center  ">
-                                <p class="text-white">$50</p>
-                                <button
-                                    class="text-sm bg-white text-black px-2 py-1 rounded-md border hover:text-white hover:bg-transparent hover:border-white  transition duration-500">Buy
-                                    Now</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="w-1/3 p-2">
-                <div class="p-4">
-                    <div class="w-full">
-                        <img src="images/new arrival skirt.jpg" alt="" class="w-full h-[26rem] object-cover">
-                        <div class="px-3 py-1 h-1/4 w-full mt-2">
-                            <div class="flex justify-between items-center mb-2">
-                                <p class="text-white">Long Aesthetic Dress</p>
-                                <div class="flex justify-end text-xl text-white">
-                                    <ion-icon name="heart-outline" class="like"></ion-icon>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center  ">
-                                <p class="text-white">$70</p>
-                                <button
-                                    class="text-sm bg-white text-black px-2 py-1 rounded-md border hover:text-white hover:bg-transparent hover:border-white  transition duration-500">Buy
-                                    Now</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
             <div class="mt-2">
                 <a href="/shop">
                     <button
@@ -216,38 +194,44 @@
             <h1 class="text-center text-2xl font-medium mt-4 cursor-pointer">Categories</h1><br><br>
             <div class="columns-2 px-10">
                 <div class="relative px-4 hover:brightness-125 transition-all duration-800 ease-in-out cursor-pointer">
-                    <img src="images/categories women.jpg" alt=""
-                        class="w-full h-[38rem] object-cover brightness-50 drop-shadow-sm contrast-100">
-                    <div class="text-overlay absolute items-center justify-center flex inset-0">
-                        <a href="/shop/women" class="relative group">
+                    <a href="/shop/women" class="relative group">
+
+                        <img src="images/categories women.jpg" alt=""
+                            class="w-full h-[38rem] object-cover brightness-50 drop-shadow-sm contrast-100">
+                        <div class="text-overlay absolute items-center justify-center flex inset-0">
                             <h2
                                 class="text-3xl font-medium text-white opacity-80 tracking-widest after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-[-0.25rem] after:bg-white after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-300 group-hover:after:scale-x-100 after:ease-in-out">
                                 WOMEN</h2>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
+
                 </div>
                 <div class="w-full px-4">
                     <div class="relative hover:brightness-125 transition-all duration-800 ease-in-out cursor-pointer">
-                        <img src="images/categories men.jpg" alt=""
-                            class="w-full h-[18rem] object-cover brightness-50 drop-shadow-sm contrast-100">
-                        <div class="text-overlay absolute items-center justify-center flex inset-0">
-                            <a href="/shop/men" class="relative group">
+                        <a href="/shop/men" class="relative group">
+
+                            <img src="images/categories men.jpg" alt=""
+                                class="w-full h-[18rem] object-cover brightness-50 drop-shadow-sm contrast-100">
+                            <div class="text-overlay absolute items-center justify-center flex inset-0">
                                 <h2
                                     class="text-3xl font-medium text-white opacity-80 tracking-widest after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-[-0.25rem]  after:bg-white after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-300 group-hover:after:scale-x-100 after:ease-in-out">
                                     MEN</h2>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
+
                     </div>
                     <div class="relative hover:brightness-125 transition-all duration-800 ease-in-out cursor-pointer">
-                        <img src="images/women accessories.jpg" alt=""
-                            class="w-full h-[18rem] object-cover mt-8 brightness-50 drop-shadow-sm contrast-100">
-                        <div class="text-overlay absolute items-center justify-center flex inset-0">
-                            <a href="/shop/accessories" class="relative group">
+                        <a href="/shop/accessories" class="relative group">
+
+                            <img src="images/women accessories.jpg" alt=""
+                                class="w-full h-[18rem] object-cover mt-8 brightness-50 drop-shadow-sm contrast-100">
+                            <div class="text-overlay absolute items-center justify-center flex inset-0">
                                 <h2
                                     class="text-3xl font-medium text-white opacity-80 tracking-widest after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-[-0.25rem]  after:bg-white after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-300 group-hover:after:scale-x-100 after:ease-in-out">
                                     ACCESSORIES</h2>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
+
                     </div>
                 </div>
             </div><br><br>

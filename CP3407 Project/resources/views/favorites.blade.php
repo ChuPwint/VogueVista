@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Shopping Cart</title>
+    <title>Wishlist</title>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     @vite('resources/css/app.css')
@@ -43,7 +43,7 @@
                         </thead>
                         <tbody>
                             {{-- Start of cart items --}}
-                            @foreach ($wishlists as $wishlist)
+                            @forelse ($wishlists as $wishlist)
                                 <tr class="bg-white border-b border-b-light-gray border-opacity-25 hover:bg-gray-50">
                                     <th
                                         class="px-6 py-4 justify-center font-medium flex items-center text-gray-900 whitespace-nowrap">
@@ -61,7 +61,8 @@
                                         {{ $wishlist->product->stock > 0 ? 'In Stock' : 'Out of Stock' }}
                                     </td>
                                     <td class="px-3 py-4 text-center">
-                                        <form action="{{ route('cart.store') }}" method="POST" class="{{ $wishlist->product->stock > 0 ? 'block' : 'hidden' }}">
+                                        <form action="{{ route('cart.store') }}" method="POST"
+                                            class="{{ $wishlist->product->stock > 0 ? 'block' : 'hidden' }}">
                                             @csrf
                                             <input type="hidden" name="productId" value=" {{ $wishlist->product_id }}">
                                             <input type="hidden" name="quantity" value=1>
@@ -70,7 +71,7 @@
                                                     to cart</button>
                                             </div>
                                         </form>
-                                        
+
                                     </td>
                                     <td class="px-3 py-4 text-center">
                                         <form action="{{ route('favorites.destroy', $wishlist->product_id) }}"
@@ -84,7 +85,13 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center py-4">
+                                        No wishlists added yet.
+                                    </td>
+                                </tr>
+                            @endforelse
                             {{-- End of cart items --}}
                         </tbody>
                     </table>
