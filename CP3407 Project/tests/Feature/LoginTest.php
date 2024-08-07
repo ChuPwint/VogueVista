@@ -10,19 +10,21 @@ use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
+    /** @test */
     public function a_user_can_login_with_correct_credentials()
     {
-        $user = User::where("email", "choopwintchal@gmail.com")->first();
+        $user = User::factory()->create([
+            'email' => 'kimroselle83@gmail.com',
+            'password' => Hash::make('kim1234##'),
+        ]);
 
         $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'chOO1234##',
+            'email' => 'kimroselle83@gmail.com',
+            'password' => 'kim1234##',
         ]);
 
         $this->assertAuthenticatedAs($user);
         $response->assertStatus(302);
         $response->assertRedirect('/');
     }
-
-
 }
