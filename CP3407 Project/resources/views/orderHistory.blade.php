@@ -29,53 +29,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($orders as $order)
-                            <tr>
-                                <td class="border px-4 py-2">{{ $order->id }}</td>
-                                <td class="border px-4 py-2">${{ number_format($order->totalPrice) }}</td>
-                                @php
-                                    if ($order->del_flg == 0) {
-                                        $order_status = 'In Progress';
-                                    } else {
-                                        $order_status = 'Delivered';
-                                    }
-                                @endphp
-
-                                <td class="border px-4 py-2">{{ $order_status }}</td>
-                                <td class="border px-4 py-2">{{ $order->created_at->format('Y-m-d') }}</td>
-                                <td class="border px-4 py-2">
-                                    <button onclick="toggleDetails({{ $order->id }})" class="text-blue-500">View
-                                        Details</button>
-                                </td>
-                            </tr>
-                            <tr id="details-{{ $order->id }}" style="display: none;">
-                                <td colspan="5" class="border px-4 py-2">
-                                    <table class="table-auto w-full">
-                                        <thead>
-                                            <tr>
-                                                <th class="px-4 py-2">Product Description</th>
-                                                <th class="px-4 py-2 text-left"></th>
-                                                <th class="px-4 py-2">Quantity</th>
-                                                <th class="px-4 py-2">Total Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($orderDetails as $detail)
-                                                <tr class="border">
-                                                    <td class=" px-4 py-2 flex justify-center items-center"><img
-                                                            class="w-20 h-20 " src="{{ $detail->product->p_photo }}"
-                                                            alt=""></td>
-                                                    <td class=" px-4 py-2 text-left">{{ $detail->product->pname }}</td>
-                                                    <td class=" px-4 py-2">{{ $detail->quantity }}</td>
-                                                    <td class=" px-4 py-2">${{ number_format($detail->totalPrice) }}
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        @endforeach
                         @forelse ($orders as $order)
                             <tr>
                                 <td class="border px-4 py-2">{{ $order->id }}</td>

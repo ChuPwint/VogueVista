@@ -37,7 +37,6 @@
             <div class="">
                 <div class="px-4">
                     <p class="font-semibold mb-3 text-2xl">Thank you for shopping with us!</p>
-                    <p class="font-semibold mb-2 text-lg">Order No. (#123456)</p>
                     <hr class="w-full border border-light-gray">
                 </div>
                 <div class="mt-2 flex justify-between ">
