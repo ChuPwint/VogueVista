@@ -219,7 +219,7 @@
                     <img src="images/categories women.jpg" alt=""
                         class="w-full h-[38rem] object-cover brightness-50 drop-shadow-sm contrast-100">
                     <div class="text-overlay absolute items-center justify-center flex inset-0">
-                        <a href="#shop" class="relative group">
+                        <a href="/shop/women" class="relative group">
                             <h2
                                 class="text-3xl font-medium text-white opacity-80 tracking-widest after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-[-0.25rem] after:bg-white after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-300 group-hover:after:scale-x-100 after:ease-in-out">
                                 WOMEN</h2>
@@ -231,7 +231,7 @@
                         <img src="images/categories men.jpg" alt=""
                             class="w-full h-[18rem] object-cover brightness-50 drop-shadow-sm contrast-100">
                         <div class="text-overlay absolute items-center justify-center flex inset-0">
-                            <a href="#shop" class="relative group">
+                            <a href="/shop/men" class="relative group">
                                 <h2
                                     class="text-3xl font-medium text-white opacity-80 tracking-widest after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-[-0.25rem]  after:bg-white after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-300 group-hover:after:scale-x-100 after:ease-in-out">
                                     MEN</h2>
@@ -242,7 +242,7 @@
                         <img src="images/women accessories.jpg" alt=""
                             class="w-full h-[18rem] object-cover mt-8 brightness-50 drop-shadow-sm contrast-100">
                         <div class="text-overlay absolute items-center justify-center flex inset-0">
-                            <a href="#shop" class="relative group">
+                            <a href="/shop/accessories" class="relative group">
                                 <h2
                                     class="text-3xl font-medium text-white opacity-80 tracking-widest after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-[-0.25rem]  after:bg-white after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-300 group-hover:after:scale-x-100 after:ease-in-out">
                                     ACCESSORIES</h2>

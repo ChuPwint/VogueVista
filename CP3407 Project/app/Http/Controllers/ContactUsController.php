@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Cart;
+use App\Models\Products;
 use Illuminate\Http\Request;
 use App\Models\ContactUs;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +15,24 @@ class ContactUsController extends Controller
     //
     public function index()
     {
-        return view("/contactUs");
+        $status = "logOut";
+        $cartItems = 0;
+        if (Auth::check()) {
+            $status = "logIn";
+            $cart = new Cart();
+            $cartItems = $cart->getItemCount(Auth::id());
+        }
+
+        $product = new Products();
+        $allProduct = $product->showPaginate();
+        $count = count($product->showAll());
+
+        return view('contactUs', [
+            'status' => $status,
+            'cartItems' => $cartItems,
+            'products' => $allProduct,
+            'count' => $count,
+        ]);
     }
 
     public function store(Request $request)
