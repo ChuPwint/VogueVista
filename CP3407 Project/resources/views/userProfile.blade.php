@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +8,8 @@
     @vite('resources/css/app.css')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
-
 <body>
-    @include('includes.navbar', ['status' => $status, "cartItems" => $cartItems])
+    @include('includes.navbar', ['status' => $status, 'cartItems' => $cartItems])
 
     <div class="flex">
         @include('profile.sidebar', ['status' => $status])
@@ -125,21 +123,16 @@
             formData.append('profile_image', file);
             formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
 
-            fetch('{{ route('updateProfile') }}', {
+            fetch('{{ route('updateProfileImage') }}', {
                 method: 'POST',
                 body: formData,
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Update the profile image in the main view
-                    const newImageUrl = data.image_url + '?t=' + new Date().getTime(); // Cache-busting
+                    const newImageUrl = data.image_url + '?t=' + new Date().getTime();
                     document.getElementById('profileImageMain').src = newImageUrl;
-
-                    // Update the profile image in the modal
                     document.getElementById('profileImageModalImg').src = newImageUrl;
-
-                    // Hide the modal
                     document.getElementById('profileImageModal').classList.add('hidden');
                 } else {
                     console.error('Server response error:', data.message);
@@ -181,7 +174,6 @@
         });
     });
 });
-
     </script>
 </body>
 </html>

@@ -30,7 +30,7 @@ class ContactUsController extends Controller
             $status = "logOut";
             $cartItems = [];
         }
-        
+
         return view("contactUs", [
             "allItems" => $cartItems,
             'status' => $status,

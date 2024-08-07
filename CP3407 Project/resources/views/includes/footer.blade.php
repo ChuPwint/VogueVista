@@ -2,7 +2,7 @@
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
-                <a href="https://flowbite.com/">
+                <a href="/">
                     <h1
                         class="text-2xl font-bold italic whitespace-nowrap text-white align-middle text-center">
                         Vogue Vista</h1>
@@ -101,8 +101,8 @@
     </div>
     <hr>
     <div class="mt-6 text-center mx-0">
-        <span class="text-sm text-[#CDCDC5] opacity-92 sm:text-center">© 2024 <a
-                href="https://voguevista.com/">Vogue Vista</a>. All Rights Reserved.
+        <span class="text-sm text-[#CDCDC5] opacity-92 sm:text-center">© 2024
+                Vogue Vista. All Rights Reserved.
         </span>
     </div><br>
 </footer>
