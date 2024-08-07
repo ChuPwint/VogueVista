@@ -51,7 +51,7 @@ class FavoritesController extends Controller
             $wishlist->addWishlistItem(Auth::id(), $request->productId);
         }
 
-        return redirect()->route("shop");
+        return redirect()->back();
     }
 
     /**

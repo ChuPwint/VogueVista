@@ -65,6 +65,13 @@ class Products extends Model
         return Products::where('stock', '>', 0)->get();
     }
 
+    public function showThreeNewArrivals(){
+        return Products::where('stock', '>', 0)
+                    ->orderBy('created_at', 'desc')
+                    ->take(3)
+                    ->get();
+    }
+
     //sort product by lowest price
     public function sortByLowestPrice()
     {

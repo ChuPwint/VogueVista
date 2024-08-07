@@ -41,11 +41,7 @@
                     @error('error')
                         <small class="text-red-500">{{ $message }}</small>
                     @enderror
-                    <div class="mt-3 flex justify-between">
-                        <div>
-                            <input type="checkbox" name="remember" id="remember" class="cursor-pointer">
-                            <label for="remember" class="cursor-pointer">Keep me logged in</label>
-                        </div>
+                    <div class="mt-3 flex justify-end">
                         <div>
                             <a href="/forgotPassword" class="underline">Forgot Your Password?</a>
                         </div>

@@ -127,10 +127,13 @@
                     <div>
                         {{-- Start of categories  --}}
                         {{-- Category button --}}
-                        <button
+                        {{-- <button
                             class="categoryToggle border-b border-white  flex items-center w-full p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg group hover:bg-gray-100 hover:text-black">
                             <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Categories</span>
-                        </button>
+                        </button> --}}
+                        <div>
+                            <a href="/shop" class="categoryToggle border-b border-white  flex items-center w-full p-2 text-base transition text-white  duration-75 rounded-sm hover:rounded-lg group hover:bg-gray-100 hover:text-black">Categories</a>
+                        </div>
                         <div class="categoryList space-y-2">
                             {{-- Start of women categories list --}}
                             <a href="/shop/women"
@@ -183,7 +186,7 @@
             <div class="">
                 <div class="flex justify-between items-center">
                     <div class="font-medium">
-                        Shop > <span> {{ $count }} Products</span>
+                        Shop > @isset($catName) <span>{{ $catName }} > </span> @endisset <span> {{ $count }} Products</span>
                     </div>
                     {{-- Start of Sort by --}}
                     <div>

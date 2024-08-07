@@ -13,7 +13,7 @@
                     <h2 class="mb-4 text-l font-semibold text-white uppercase italic">Information</h2>
                     <ul class="text-white font-medium">
                         <li class="mb-2 group">
-                            <a href="/home"
+                            <a href="/"
                                 class="relative after:content-[''] after:absolute after:w-full after:h-[1px] after:bottom-[-0.25rem] after:bg-white after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-300 group-hover:after:scale-x-100 after:ease-in-out">Home</a>
                         </li>
                         <li class="mb-2 group">
@@ -31,16 +31,16 @@
                     <h2 class="mb-4 text-l font-semibold uppercase text-white italic">Shop</h2>
                     <ul class="text-white font-medium">
                         <li class="mb-2 group">
-                            <a href="/shop"
+                            <a href="/shop/men"
                                 class="relative after:content-[''] after:absolute after:w-full after:h-[1px] after:bottom-[-0.25rem] after:bg-white after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-300 group-hover:after:scale-x-100 after:ease-in-out">Men</a>
                         </li>
                         <li class="mb-2 group">
-                            <a href="/shop"
+                            <a href="/shop/women"
                                 class="relative after:content-[''] after:absolute after:w-full after:h-[1px] after:bottom-[-0.25rem] after:bg-white after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-300 group-hover:after:scale-x-100 after:ease-in-out">Women</a>
                         </li>
                         <li class="group">
-                            <a href="/shop"
-                                class="relative after:content-[''] after:absolute after:w-full after:h-[1px] after:bottom-[-0.25rem] after:bg-white after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-300 group-hover:after:scale-x-100 after:ease-in-out">Accessoriess</a>
+                            <a href="/shop/accessories"
+                                class="relative after:content-[''] after:absolute after:w-full after:h-[1px] after:bottom-[-0.25rem] after:bg-white after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-300 group-hover:after:scale-x-100 after:ease-in-out">Accessories</a>
                         </li>
                     </ul>
                 </div>

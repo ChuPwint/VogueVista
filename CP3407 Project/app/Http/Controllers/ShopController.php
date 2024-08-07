@@ -24,51 +24,51 @@ class ShopController extends Controller
      * Display women products
     */
     public function showWomenProducts(){
-        return $this->showProducts(1);
+        return $this->showProducts(1, null, "Women");
     }
 
     /**
      * Display men products
     */
     public function showMenProducts(){
-        return $this->showProducts(2);
+        return $this->showProducts(2, null, "Men");
     }
 
     /**
      * Display accessory products
     */
     public function showAccessoryProducts(){
-        return $this->showProducts(3);
+        return $this->showProducts(3, null, "Accessories");
     }
 
     public function showWomenTopProducts(){
-        return $this->showProducts(null, 1);
+        return $this->showProducts(null, 1, "Women Top");
     }
 
     public function showWomenShortsProducts(){
-        return $this->showProducts(null, 2);
+        return $this->showProducts(null, 2, "Women Shorts");
     }
 
     public function showMenTopProducts(){
-        return $this->showProducts(null, 3);
+        return $this->showProducts(null, 3, "Men Top");
     }
 
     public function showMenShortsProducts(){
-        return $this->showProducts(null, 4);
+        return $this->showProducts(null, 4, "Men Shorts");
     }
 
     public function showJewelryProducts(){
-        return $this->showProducts(null, 5);
+        return $this->showProducts(null, 5, "Jewelries");
     }
 
     public function showBagProducts(){
-        return $this->showProducts(null, 6);
+        return $this->showProducts(null, 6, "Bags");
     }
 
     /**
      * Display products related to a specific main category or all products if no category is provided.
      */
-    public function showProducts($mainCategoryId = null, $subCatId = null)
+    public function showProducts($mainCategoryId = null, $subCatId = null, $catName = null)
     {
         $status = "logOut";
         $cartItems = 0;
@@ -122,6 +122,7 @@ class ShopController extends Controller
             'products' => $products,
             'count' => $count,
             'wishlists' => $wishlistProductIds,
+            'catName' => $catName,
         ]);
     }
 
