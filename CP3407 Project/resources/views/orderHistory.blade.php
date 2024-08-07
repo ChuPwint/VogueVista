@@ -60,7 +60,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($orderDetails as $detail)
+                                            @foreach ($orderDetails[$order->id] ?? [] as $detail)
                                                 <tr class="border">
                                                     <td class=" px-4 py-2 flex justify-center items-center"><img
                                                             class="w-20 h-20 " src="{{ $detail->product->p_photo }}"
