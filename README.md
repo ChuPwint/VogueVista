@@ -1,3 +1,40 @@
+Setting up and running the VogueVista Project
+=============================================
+Prerequisites
+--------------
+-> Ensure you have PHP (version 7.3 or higher) installed.
+-> Install Composer.
+-> Install Node.js and npm.
+-> Have Xampp installed.
+
+Step-by-Step Guide
+------------------
+1. Clone the Repository
+
+2. Clone the project repository from your version control system.
+
+3. Navigate into the project directory in Visual Studio Code.
+
+4. Open Terminal and install Composer using (composer i) command.
+
+5. Use npm to install JavaScript dependencies.(npm i) command.
+
+6. Set Up the Environment File
+   --> Copy the example environment file to create a new .env file.
+   --> Update the database configuration settings in the .env file to match your local setup (database name, username, and password).
+
+7. Open Xampp and start Apache and MySQL. 
+
+8. Click Admin Button beside MySQL to open phpMyAdmin and import voguevista.sql file.
+
+9. In terminal of visual studio code, run this command line in each terminal.
+	(a). php artisan serve
+	(b). npm run dev
+
+10. Must run both in order to see the website. Then click the link seen under php artisan serve to see our website.
+
+====================================================================================================================================================
+
 # VogueVista
 Total Members: 2	Hay Man Hnin Aye & Choo Pwint Chal
 Group Project Topic	Fashion Website
